@@ -1,0 +1,50 @@
+[
+    {
+      "scenario": "hello this is some long scenario",
+      "question": "Please choose the most likely conclusion ",
+      "choice1": "The Goosebauer stock will go up",
+      "choice2": "It is unclear what will happen to the Goosebauer stock",
+      "choice3": "The neighbour will send another letter",
+      "answer": 1
+    },
+    {
+      "scenario": "Senario Info 2",
+      "question":"Given that your neighbour considers himself as an expert in stock market predictions, what is likely to happen? Please choose the most likely conclusion:",
+      "choice1": "Your neighbour will analyse and predict the stock market to make accurate predictions.",
+      "choice2": "The Goosebauer company does not have any stocks.",
+      "choice3": "It is unclear how my neighbour will perform in his future predictions.",
+      "answer": 1
+    },
+    {
+      "scenario": "Senario Info 3",
+      "question": "Please choose the most likely conclusion:",
+      "choice1": "Your neighbour can successfully predict the stock market using the novel artificial system",
+      "choice2": "Your neighbour cannot predict the stock market.",
+      "choice3": "It is unclear how my neighbour makes his stock market predictions",
+      "answer": 3
+    },
+    {
+      "scenario": "Senario Info 4",
+      "question": "Given that your neighbour has made correct stock market predictions for the last six months, what is likely to happen? Please choose the most likely conclusion: ",
+      "choice1": "Dow Chemical will go up and I can earn a lot of money by following the broker’s predictions.",
+      "choice2": "Investment in Dow Chemical does not interest me at all.",
+      "choice3": "It is unclear what will happen to the Dow Chemical stock and any investments I will make",
+      "answer": 3
+    },
+    {
+      "scenario": "Senario Info 5",
+      "question": "Please choose the most likely conclusion:",
+      "choice1": "The letters by your neighbour are not part of a fraud scheme",
+      "choice2": "Your neighbour used his expertise to analyse and predict the stock market in advance",
+      "choice3": "The letters by your neighbour are part of a fraud scheme",
+      "answer": 3
+    },
+    {
+      "scenario": "Senario Info 6",
+      "question": "Given the assertion by the detective, would you like to stop the letters? ",
+      "choice1": "Yes, the letters are part of a fraud scheme",
+      "choice2": "Unsure",
+      "choice3": "No, the letters are not part of a fraud scheme",
+      "answer": 3
+    }
+  ]
