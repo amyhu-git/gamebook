@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gamebook Survey</title>
-</head>
-<body>
-    <%- include('../partials/header.ejs') %>
+  </head>
+
+  <style>
+    .navbar-brand {
+      position: relative;
+      background: url(../images/logo.png);
+      width: 80px;
+      /* left: 100px; */
+      max-height: 40px;
+      background-position: center;
+    }
+  </style>
+  <body>
+    <%- include('../partials/header.ejs') %> 
     <%- body %>
-</body>
+  </body>
 </html>

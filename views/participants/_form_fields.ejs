@@ -1,22 +1,81 @@
-<div id="input">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Survey</title>
 
-  <label>Please indicate your age group:</label>
-  <select id="age_group" name="age_group">
-      <option value="1">18-24</option>
-      <option value="2">25-34</option>
-      <option value="3">35-44</option>
-      <option value="4">44-64</option>
-      <option value="5">65 or older</option>
-      <option value="6">Rather Not Say</option>
-  </select>
-  <br>
-  <label>Please indicate your gender</label>
-  <select id="gender" name="gender">
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-      <option value="others">Others</option>
-      <option value="na">Rather Not Say</option>
-  </select>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
 
-  <!-- <button id="submit" onClick="lotteryGame()">PLAY</button> -->
-</div>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div id="instruction" class="flex-center flex-column">
+        <div class="form-group">
+          <form
+            class="add-participant-form"
+            id="input"
+            action="/participants"
+            method="POST"
+          >
+            <div class="col-xs-8 col-xs-offset-3">
+              <label for="participation_number">
+                Please enter the <b>participation number</b> given by the
+                researcher:</label
+              >
+              <input
+                class="form-control"
+                id="participation-number"
+                name="participation_number"
+              />
+            </div>
+            <br>
+            <label for="age_group">Please indicate your age group:</label>
+            <select
+              class="form-control form-control-lg"
+              id="age_group"
+              name="age_group"
+            >
+              <option value="1">18-24</option>
+              <option value="2">25-34</option>
+              <option value="3">35-44</option>
+              <option value="4">44-64</option>
+              <option value="5">65 or older</option>
+              <option value="6">Rather Not Say</option>
+            </select>
+            <br />
+            <label for="gender">Please indicate your gender</label>
+            <select
+              class="form-control form-control-lg"
+              id="gender"
+              name="gender"
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="others">Others</option>
+              <option value="na">Rather Not Say</option>
+            </select>
+            <hr>
+            <!-- <a class="btn" type="submit" href="/participants/continue" style="color: #00539b">
+                CONTINUE </a
+              > -->
+            <button class="btn" type="submit"> CONTINUE </button>
+
+              
+
+            <!-- <button id="submit" onClick="lotteryGame()">PLAY</button> -->
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script src="client.js"></script> -->
+  </body>
+</html>

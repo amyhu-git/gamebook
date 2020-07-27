@@ -1,14 +1,13 @@
 const sql = require("./db.js");
 
-// constructor
-const Participant = function (participant) {
-//   this.age_group = participant.age_group;
-//   this.gender = participant.gender;
-//   this.control = participant.control;
+const Participant = function(participant) {
+    this.participation_number = participant.participation_number;
+    this.age_group = participant.age_group;
+    this.gender = participant.gender;
 };
 
-Participant.create = (newParticipant, result) => {
-  sql.query("INSERT INTO participants SET ?", newParticipant, (err, res) => {
+Participant.insert = (newParticipant, result) => {
+  sql.query(`INSERT INTO players SET ?`, newParticipant, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);

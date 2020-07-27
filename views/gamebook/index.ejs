@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Survey</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- <link rel="stylesheet" href="../css/survey.css"/> -->
+
+  </head>
+
+  <style>
+    
+.choice-container {
+    display: flex;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    font-size: 1.8rem;
+    border: 0.1rem solid rgb(86, 165, 235, 0.25);
+    background-color: white;
+  }
+  
+  .choice-container:hover {
+    cursor: pointer;
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+    transform: translateY(-0.1rem);
+    transition: transform 150ms;
+  }
+  
+  .choice-prefix {
+    padding: 1.5rem 2.5rem;
+    background-color: #00539b;
+    color: white;
+  }
+  
+  .choice-text {
+    padding: 1.5rem;
+    width: 100%;
+  }
+
+  .correct, .incorrect {
+    background-color: rgb(207, 207, 207);
+  }
+
+  /* HUD */
+
+  #hud {
+    display:flex;
+    justify-content: space-around;
+    margin-bottom: 5rem;
+  }
+
+  .hud-prefix {
+    text-align: center;
+    font-size: 2rem; 
+  }
+
+  .hud-main-text {
+    text-align: center;
+  }
+
+  #progressBar {
+    width: 20rem;
+    height: 4rem;
+    border: 0.3rem solid #00539b;
+    margin-top: 1.5rem;
+  }
+  
+  #progressBarFull {
+    height: 3.4rem;
+    background-color: #00539b;
+    width: 0%;
+  }
+
+  /*LOADER: W3School Loader*/
+
+  /* #loader {
+    border: 1.6rem solid white;
+    border-radius: 50%;
+    border-top: 1.6rem solid #00539b;
+    width: 12rem;
+    height: 12rem;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } */
+  </style>
+
+  <body>
+    <div class="container">
+      <div id="instruction" class="flex-cener flex-column">
+        <div class="hero-unit">
+          <h1 class="font-weight-light">Part 2</h1>
+          <h3 class="font-weight-light text-justify"> 
+            In this part you will be presented with a set of everyday reasoning scenario that require a decision to be made. For each point of the scenario, a set of actions are suggested for you.
+            <b>Please carefully read each scenario and the suggested set of actions, and select the one you think would be most appropriate.</b>
+          </h3>
+          <hr>
+
+          <div class="container">
+            <div id="loader"></div>
+            <div id="survey" class="justify-center flex-column hidden">
+                <div id="hud">
+                    <div id="hud-item">
+                        <p id="progressText" class="hud-prefix">
+                            Question
+                        </p>
+                        <div class="hud-main-text" id="progressBar">
+                            <div id="progressBarFull"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="scenario"></h3>
+                </div>
+                <h3 id="question"></h3>
+                <div class="choice-container">
+                    <p class="choice-prefix">A</p>
+                    <p class="choice-text" data-number="1"></p>
+                </div>
+                <div class="choice-container">
+                    <p class="choice-prefix">B</p>
+                    <p class="choice-text" data-number="2"></p>
+                </div>
+                <div class="choice-container">
+                    <p class="choice-prefix">C</p>
+                    <p class="choice-text" data-number="3"></p>
+                </div>
+            </div>
+        </div>
+          
+      </div>
+    </div>
+
+    <!-- <script src="client.js"></script> -->
+  </body>
+</html>
+
+
+
+    
+    
