@@ -27,7 +27,6 @@ const bodyParser = require('body-parser');
 
 //require routes
 const indexRouter = require('./routes/index')
-const participantsRouter = require('./routes/participants')
 const gamebookRouter = require('./routes/gamebook')
 const usabilityRouter = require('./routes/usability')
 
@@ -58,7 +57,6 @@ app.use(bodyParser.json()); //parse form data client
 // })
 
 app.use('/', indexRouter)
-app.use('/participants', participantsRouter)
 app.use('/gamebook', gamebookRouter)
 app.use('/usability', usabilityRouter)
 
