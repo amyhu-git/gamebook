@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Participant = require("../models/participant");
+const Question = require("../models/gamebook");
 const { get } = require("http");
+const { isBuffer } = require("util");
 
 //Participation info sheet route
 router.get("/", (req, res) => {
@@ -16,34 +18,86 @@ router.get("/", (req, res) => {
 //new user route
 router.get("/part1", (req, res) => {
   res.render("gamebook/part1");
-//   res.render("participants/new");
+  //   res.render("participants/new");
+});
+
+router.get("/part2", (req, res) => {
+  res.render("gamebook/part2");
+});
+
+//create new user route
+router.post("/", (req, res) => {
+  let participation_condition = req.body.participation_condition;
+  let condition = participation_condition.charAt(0);
+  console.log(typeof condition);
+
+  const participant = new Participant({
+    participation_condition: condition,
+    age_group: req.body.age_group,
+    gender: req.body.gender,
+    date_time: new Date(),
+  });
+
+  Participant.insert(participant, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Some occurred while creating the Participant.",
+      });
+    else {
+      if (condition === "0") {
+        res.redirect("gamebook/part2");
+      } else if (condition === "1") {
+        res.redirect("gamebook/partB");
+      }
+    }
+  });
+});
+
+router.get("/allQuestions", (req, res) => {
+  Question.getAll((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving Questions.",
+      });
+    else {
+      res.send(data);
+      // console.log(data);
+    }
+  });
 });
 
 router.get("/part2", (req, res) => {
     res.render("gamebook/part2")
 })
 
-//create new user route
-router.post("/", (req, res) => {
-    
-    const participant = new Participant({
-        participation_condition: req.body.participation_condition,
-        age_group: req.body.age_group,
-        gender: req.body.gender,
-        date_time: new Date(),
-    })
-
-    Participant.insert(participant, (err, data) => {
-        if(err)
+router.get("/scenario/:questionId", (req, res) => {
+  Question.findById(req.params.questionId, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Question with id ${req.params.questionId}`,
+        });
+      } else {
         res.status(500).send({
-            message: err.message || "Some occurred while creating the Participant.",
-        })
-        else res.render("gamebook/part2")
-    })
+          message: "Error retrieving Question with id " + req.params.userId,
+        });
+      }
+    } else
+      res.render("gamebook/scenario", {
+        scenario: data.scenario,
+        letter: data.letter,
+        question: data.question,
+        choice1: data.choice1,
+        choice2: data.choice2,
+        choice3: data.choice3,
+        choice4: data.choice4,
+        biased_answer: data.biased_answer,
+      });
+  });
 });
 
 module.exports = router;
-
 
 //Create Participant Route
 // router.get("/continue", (req, res) => {
@@ -71,7 +125,7 @@ module.exports = router;
 //           message: "Content can not be empty!",
 //         });
 //       }
-  
+
 //       // Create a User
 //       const participant = new Participant({
 //         age_group: req.body.age_group,
@@ -80,7 +134,7 @@ module.exports = router;
 //       });
 
 //       console.log(participant)
-  
+
 //       // Save User in the database
 //       Participant.create(participant, (err, data) => {
 //         if (err)
@@ -90,8 +144,6 @@ module.exports = router;
 //         else res.send(data);
 //       });
 // })
-
-
 
 // res.send(req.body.age_group);
 //   let info = new Object();

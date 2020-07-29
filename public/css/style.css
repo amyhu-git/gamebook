@@ -7,8 +7,8 @@ img {
   margin-right: auto;
 }
 
-.hero-unit{
-    font-size: large;
+.hero-unit {
+  font-size: large;
 }
 
 /* :root {
@@ -84,17 +84,54 @@ h4 {
   margin-right: auto;
 }
 
+/* HUD */
+/* 
+  #hud {
+    display:flex;
+    justify-content: space-around;
+    margin-bottom: 5rem;
+  }
 
-.btn:hover {
-  cursor: pointer;
-  /* box-shadow: 0 0.4rem 1.4rem 0 rgba(75, 142, 230, 0.534); */
-  border: 0.1rem solid #717074;
-  transform: translateY(-0.1rem);
-  transition: transform 150ms;
-}
+  .hud-prefix {
+    text-align: center;
+    font-size: 2rem; 
+  }
 
-.btn[disabled]:hover {
-  cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
-}
+  .hud-main-text {
+    text-align: center;
+  }
+
+  #progressBar {
+    width: 20rem;
+    height: 4rem;
+    border: 0.3rem solid #00539b;
+    margin-top: 1.5rem;
+  }
+  
+  #progressBarFull {
+    height: 3.4rem;
+    background-color: #00539b;
+    width: 0%;
+  }  */
+
+/*LOADER: W3School Loader*/
+
+/* #loader {
+    border: 1.6rem solid rgb(207, 205, 205);
+    border-radius: 50%;
+    border-top: 1.6rem solid #00539b;
+    width: 12rem;
+    height: 12rem;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  } */
+
+
