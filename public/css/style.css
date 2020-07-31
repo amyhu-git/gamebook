@@ -134,4 +134,52 @@ h4 {
     }
   } */
 
+.btn:hover {
+  cursor: pointer;
+  /* box-shadow: 0 0.4rem 1.4rem 0 rgba(75, 142, 230, 0.534); */
+  border: 0.1rem solid #717074;
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+}
 
+.btn[disabled]:hover {
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.choice-container {
+  display: flex;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  font-size: 1.8rem;
+  border: 0.1rem solid rgb(86, 165, 235, 0.25);
+  background-color: white;
+}
+
+.choice-container:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(221, 221, 221, 0.5);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+}
+
+.choice-prefix {
+  padding: 1.5rem 2.5rem;
+  background-color: #00539b;
+  color: white;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.choice-text {
+  padding: 1.5rem;
+  width: 100%;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.correct,
+.incorrect {
+  background-color: rgb(207, 207, 207);
+}

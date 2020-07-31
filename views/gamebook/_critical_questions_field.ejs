@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>cScenario</title>
+  </head>
+
+  <body>
+
+    <div class="container">
+      <h3 class="text-justify" name="cQuestion<%= criticalQ_id%>">
+        <%= cQuestion1%>
+      </h3>
+      <br />
+      <h2><%= criticalQ_id %></h2>
+      <br />
+      <div type="submit" class="choice-container" value="1">
+        <p class="choice-prefix">A</p>
+        <p
+          class="choice-text font-weight-light text-justify"
+          data-number="1"
+          value="1"
+        >
+          <%= choice1 %>
+        </p>
+      </div>
+      <div class="choice-container">
+        <p class="choice-prefix">B</p>
+        <p
+          class="choice-text font-weight-light text-justify"
+          data-number="2"
+          value="2"
+        >
+          <%= choice2 %>
+        </p>
+      </div>
+      <div class="choice-container">
+        <p class="choice-prefix">C</p>
+        <p
+          class="choice-text font-weight-light text-justify"
+          data-number="3"
+          value="3"
+        >
+          <%= choice3 %>
+        </p>
+      <!-- </div>
+      <div class="choice-container">
+        <p class="choice-prefix">C</p>
+        <p
+          class="choice-text font-weight-light text-justify"
+          data-number="4"
+          value="4"
+        >
+          <%= alternative1 %>
+        </p>
+      </div>
+      <div class="choice-container">
+        <p class="choice-prefix">C</p>
+        <p
+          class="choice-text font-weight-light text-justify"
+          data-number="4"
+          value="4"
+        >
+          <%= alternative2 %>
+        </p>
+      </div>
+      <div class="choice-container">
+        <p class="choice-prefix">C</p>
+        <p
+          class="choice-text font-weight-light text-justify"
+          data-number="4"
+          value="4"
+        >
+          <%= alternative3 %>
+        </p> -->
+      </div>
+      <h1>ERROR</h1>
+    </div>
+
+    <script>
+    //   const choices = Array.from(
+    //     document.getElementsByClassName("choice-text")
+    //   );
+    //   console.log(choices);
+
+    //   choices.forEach((choice) => {
+    //     choice.addEventListener("click", (e) => {
+    //       console.log(e.target.dataset["number"]);
+    //     });
+    //   });
+    </script>
+  </body>
+</html>

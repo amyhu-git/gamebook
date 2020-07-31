@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Usability Experience</title>
+    <title>Survey</title>
 
     <link
       rel="stylesheet"
@@ -15,23 +15,312 @@
     <link rel="stylesheet" href="../css/style.css" />
   </head>
 
+  <style>
+    .d-flex {
+      margin-top: 80px;
+      margin-bottom: 30px;
+    }
+
+    /* FORMS */
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input {
+      margin-bottom: 3rem;
+      width: 50rem;
+      height: 20rem;
+      padding: 1.5rem;
+      font-size: 1.8rem;
+      /* border: thin; */
+      /* box-shadow: 0 0.1rem 1.4rem 0 rgba(75, 142, 230, 0.5); */
+    }
+
+    input::placeholder {
+      color: #aaa;
+    }
+  </style>
+
   <body>
     <div class="container">
+      <br />
       <div id="instruction" class="flex-cener flex-column">
-        <div class="hero-unit">
-          <h1 class="font-weight-light">Part 3</h1>
-          <h3 class="font-weight-light text-justify"> 
-              The following questions give you the opportunity to inform us of your experience and reactions to the system. 
-              Your responses will help us understand what aspects of the survey system might have supported or disrupted its usability. 
-              Please read each statement and indicate how strongly you agree or disagree with the statement. If a statement does not apply to you, select NA. Any comments to elaborate on your answers are welcome
-          </h3>
-          <hr>
+        <div class="form-group">
+          <!-- <form
+            class="add-usability-form"
+            id="usability_input"
+            action="/usability"
+            method="POST"
+          > -->
+            <h1 class="font-weight-light text-center">Part 3</h1>
+            <h3 class="font-weight-light text-justify">
+              The following questions give you the opportunity to inform us of
+              your experience and reactions to the survey system. Your responses
+              will help us understnd whata aspects of the system might have
+              supported or disrupted its usability.
+              
+              <br><br>
+              <b
+                >Please read each statement and indicate how strongly you agree
+                or disagree with the statements. If a statement does not apply
+                to, select N.A. Any comments to elaborate your answers are
+                welcome.</b
+              >
+            </h3>
+            <hr />
+            
+
+            <div class="d-flex justify-content-center">
+              <span class="font-weight-bold purple-text mr-2 mt-1"
+                >Strongly Agree</span
+              >
+              <form class="range-field w-75">
+                <h4 class="font-weight-light text-centre">
+                  <label for="usability1"
+                    >Overall, I am satisfied with how easy it is to use this
+                    system.</label
+                  >
+                </h4>
+                <input
+                  type="range"
+                  class="custom-range"
+                  min="0"
+                  max="7"
+                  step="1"
+                  id="usability1"
+                  name="usability1"
+                  value="0"
+                  oninput="amount1.value=usability1.value"
+                  onchange="labelChange(this.id)"
+                />
+                <output
+                  class="font-weight-bold"
+                  id="amount1"
+                  name="amount1"
+                  for="usability1"
+                  >N.A.</output
+                >
+              </form>
+              <span class="font-weight-bold purple-text ml-2 mt-1"
+                >Strongly Disagree</span
+              >
+            </div>
+            <hr />
+
+            <div class="d-flex justify-content-center">
+              <span class="font-weight-bold purple-text mr-2 mt-1"
+                >Strongly Agree</span
+              >
+              <form class="range-field w-75">
+                <h4 class="font-weight-light text-centre">
+                  <label for="usability2"
+                    >I felt comfortable using this system.</label
+                  >
+                </h4>
+                <input
+                  type="range"
+                  class="custom-range"
+                  min="0"
+                  max="7"
+                  step="1"
+                  id="usability2"
+                  name="usability2"
+                  value="0"
+                  oninput="amount2.value=usability2.value"
+                  onchange="labelChange(this.id)"
+                />
+                <output
+                  class="font-weight-bold"
+                  id="amount2"
+                  name="amount2"
+                  for="usability2"
+                  >N.A.</output
+                >
+              </form>
+              <span class="font-weight-bold purple-text ml-2 mt-1"
+                >Strongly Disagree</span
+              >
+            </div>
+            <hr />
+
+            <div class="d-flex justify-content-center">
+              <span class="font-weight-bold purple-text mr-2 mt-1"
+                >Strongly Agree</span
+              >
+              <form class="range-field w-75">
+                <h4 class="font-weight-light text-centre">
+                  <label for="usability3"
+                    >The information was effective in helping me complete the
+                    tasks and scenarios.</label
+                  >
+                </h4>
+                <input
+                  type="range"
+                  class="custom-range"
+                  min="0"
+                  max="7"
+                  step="1"
+                  id="usability3"
+                  name="usability3"
+                  value="0"
+                  oninput="amount3.value=usability3.value"
+                  onchange="labelChange(this.id)"
+                />
+                <output
+                  class="font-weight-bold"
+                  id="amount3"
+                  name="amount3"
+                  for="usability3"
+                  >N.A.</output
+                >
+              </form>
+              <span class="font-weight-bold purple-text ml-2 mt-1"
+                >Strongly Disagree</span
+              >
+            </div>
+            <hr />
+
+            <div class="d-flex justify-content-center">
+              <span class="font-weight-bold purple-text mr-2 mt-1"
+                >Strongly Agree</span
+              >
+              <form class="range-field w-75">
+                <h4 class="font-weight-light text-centre">
+                  <label for="usability4"
+                    >The organization of information on the system screens was
+                    clear.</label
+                  >
+                </h4>
+                <input
+                  type="range"
+                  class="custom-range"
+                  min="0"
+                  max="7"
+                  step="1"
+                  id="usability4"
+                  name="usability4"
+                  value="0"
+                  oninput="amount4.value=usability4.value"
+                  onchange="labelChange(this.id)"
+                />
+                <output
+                  class="font-weight-bold"
+                  id="amount4"
+                  name="amount4"
+                  for="usability4"
+                  >N.A.</output
+                >
+              </form>
+              <span class="font-weight-bold purple-text ml-2 mt-1"
+                >Strongly Disagree</span
+              >
+            </div>
+            <hr />
+
+            <div class="d-flex justify-content-center">
+              <span class="font-weight-bold purple-text mr-2 mt-1"
+                >Strongly Agree</span
+              >
+              <form class="range-field w-75">
+                <h4 class="font-weight-light text-centre">
+                  <label for="usability5"
+                    >I liked using the interface of the system.</label
+                  >
+                </h4>
+                <input
+                  type="range"
+                  class="custom-range"
+                  min="0"
+                  max="7"
+                  step="1"
+                  id="usability5"
+                  name="usability5"
+                  value="0"
+                  oninput="amount5.value=usability5.value"
+                  onchange="labelChange(this.id)"
+                />
+                <output
+                  class="font-weight-bold"
+                  id="amount5"
+                  name="amount5"
+                  for="usability5"
+                  >N.A.</output
+                >
+              </form>
+              <span class="font-weight-bold purple-text ml-2 mt-1"
+                >Strongly Disagree</span
+              >
+            </div>
+            <hr />
+
+            <div class="d-flex justify-content-center">
+              <span class="font-weight-bold purple-text mr-2 mt-1"
+                >Strongly Agree</span
+              >
+              <form class="range-field w-75">
+                <h4 class="font-weight-light text-centre">
+                  <label for="usability6"
+                    >Overall, I am satisfied with this system.</label
+                  >
+                </h4>
+                <input
+                  type="range"
+                  class="custom-range"
+                  min="0"
+                  max="7"
+                  step="1"
+                  id="usability6"
+                  name="usability6"
+                  value="0"
+                  oninput="amount6.value=usability6.value"
+                  onchange="labelChange(this.id)"
+                />
+                <output
+                  class="font-weight-bold"
+                  id="amount6"
+                  name="amount6"
+                  for="usability6"
+                  >N.A.</output
+                >
+              </form>
+              <span class="font-weight-bold purple-text ml-2 mt-1"
+                >Strongly Disagree</span
+              >
+            </div>
+            <hr />
+            <br />
+            <h4 class="font-weight-light text-centre">
+              <label for="usability6">
+                Please use this space for addtitional comments to elaborate your
+                answers.
+              </label>
+            </h4>
+            <input
+              type="text"
+              name="usability_comment"
+              id="usability_comment"
+              placeholder="E.g. issues, suggestions, etc. "
+            />
+            <hr />
+            <button class="btn" type="submit">SUBMIT</button>
+          </form>
+        </div>
       </div>
     </div>
 
-    <!-- <script src="client.js"></script> -->
+    <script>
+    const labelChange = (id) => {
+          let usabilityRange = document.getElementById(`${id}`)
+          let number = id.substring(id.length-1, id.length)
+          let amount = document.getElementById(`amount${number}`)
+
+          if(usabilityRange.value === "0") {
+              amount.value = "N.A."
+          };
+    };
+    </script>
   </body>
 </html>
-
-
-

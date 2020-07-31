@@ -12,6 +12,8 @@ const Question = function(question) {
     this.non_biased_answer = question.non_biased_answer;
     this.unrelated_answer = question.unrelated_answer;
     this.choice4 = question.choice4;
+    this.biased_route = question.biased_route;
+    this.nonbiased_route = question.nonbiased_route;
 };
 
 Question.getAll = (result) => {

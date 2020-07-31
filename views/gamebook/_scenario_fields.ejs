@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
 <style>
   @font-face {
     font-family: "Ink Free";
@@ -70,32 +78,52 @@
   }
 
   /* FORMS */
-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-input {
-  margin-bottom: 3rem;
-  width: 50rem;
-  height: 20rem; 
-  padding: 1.5rem;
-  font-size: 1.5rem;
-  /* box-shadow: 0 0.1rem 1.4rem 0 rgba(75, 142, 230, 0.5); */
-}
+  input {
+    margin-bottom: 3rem;
+    width: 50rem;
+    height: 20rem;
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    /* box-shadow: 0 0.1rem 1.4rem 0 rgba(75, 142, 230, 0.5); */
+  }
 
-input::placeholder {
-  color: #aaa;
-}
+  input::placeholder {
+    color: #aaa;
+  }
 </style>
 <br />
+
+<body>
+  <% if( question_id < 2) { %> 
+<form
+  class="add-answers-form"
+  id="input"
+  action="/gamebook/scenario"
+  enctype="application/x-www-form-urlencoded"
+  method="POST"
+>
+  <% } else { %> 
+    <form
+    class="add-answers-form"
+    id="input"
+    action= "/gamebook/edit"
+    enctype="application/x-www-form-urlencoded"
+    method="POST"
+  >
+  <% } %> 
+<h2>Participant ID: <%= participant_id %> ***REMOVE THIS LATER</h2>
 
 <% if (question) { %>
 <div class="container">
   <hr />
-  <h3 class="font-weight-light text-justify" id="scneario"><%= scenario %></h3>
+  <h3 class="font-weight-light text-justify" id="scenario"><%= scenario %></h3>
   <hr />
   <% if (letter) { %>
   <p class="text-justify text-lg" id="letter">
@@ -103,62 +131,87 @@ input::placeholder {
   </p>
   <% } %>
   <br />
-  <h3 class="text-justify" id="question">
+  <h3 class="text-justify" id="question" name="question_id" value="<%= question_id %> "> 
     <%= question %>
   </h3>
+  <p>Question ID: <%= question_id %> ****REMOVE THIS LATER</p>
   <br />
   <% if (choice1) { %>
-  <div class="choice-container">
+  <button type="submit" class="btn choice-container"  id="answer<%=question_id%>" name="answer<%=question_id%>" value="1">
     <p class="choice-prefix">A</p>
     <p
       class="choice-text font-weight-light text-justify"
       data-number="1"
+      name="answer<%question_id%>"
       value="1"
     >
       <%= choice1 %>
     </p>
-  </div>
-  <div class="choice-container">
+    <p class="text-justify" id="question" name="question_id" value="<%=question_id%> "></p>
+  </button>
+  <button type="submit" class="btn choice-container" name="answer<%=question_id%>" value="2">
     <p class="choice-prefix">B</p>
     <p
       class="choice-text font-weight-light text-justify"
       data-number="2"
-      value="2"
     >
       <%= choice2 %>
     </p>
-  </div>
-  <div class="choice-container">
+  </button>
+  <button type="submit" class="btn choice-container" name="answer<%=question_id%>" value="3">
     <p class="choice-prefix">C</p>
     <p
       class="choice-text font-weight-light text-justify"
       data-number="3"
-      value="3"
     >
       <%= choice3 %>
     </p>
-  </div>
+  </button>
   <% if(choice4) { %>
-  <div class="choice-container">
+  <button type="submit" class="btn choice-container" name="answer<%=question_id%>" value="4">
     <p class="choice-prefix">C</p>
     <p
       class="choice-text font-weight-light text-justify"
       data-number="4"
-      value="4"
     >
       <%= choice4 %>
     </p>
-  </div>
+  </button>
   <% } %> <% } else {%>
-    <form>
-        <input
-        type="text"
-        name="comment"
-        id="comment"
-        placeholder="Please elaborate your answer... "
-      />
-        <button type="submit" class="btn" id="saveDataBtn" onClick="saveScore(event)" disabled> SUBMIT </button>
-    </form>
-  <% } %> 
+  <form>
+    <input
+      type="text"
+      name="comment<%question_id%> "
+      id="comment"
+      placeholder="Please elaborate your answer... "
+    />
+    <button
+      type="submit"
+      class="btn"
+      id="saveDataBtn"
+      onClick="saveScore(event)"
+      disabled
+    >
+      SUBMIT
+    </button>
+  </form>
+  <% } %>
 </div>
 <% } %>
+</form>
+
+<script>
+    const choices = Array.from(document.getElementsByClassName("choice-text"));
+    let selectedAnswer
+
+    choices.forEach((choice) =>  {
+        choice.addEventListener("click", (e) => {
+            let selectedChoice = e.target
+            selectedAnswer = selectedChoice.dataset["number"];
+            console.log(selectedAnswer)
+        }) 
+    })
+
+</script>
+</body>
+</html>
