@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Scenario</title>
+
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+    crossorigin="anonymous"
+  />
+
+    <link rel="stylesheet" href="../css/style.css" />
 </head>
+
 
 <style>
   @font-face {
@@ -25,6 +35,32 @@
   #letter {
     font-size: 25px;
     font-family: "Ink Free";
+  }
+
+  /* BUTTONS */
+  .btn {
+    text-align: center;
+    font-size: 1.8rem;
+    /* padding: 1rem 0;
+    width: 20rem;
+    border: 0.1rem solid #717074;
+    /* margin-bottom: 1rem; */
+    /* text-decoration: none;
+    border: 0.1rem solid #00539b;
+    color: #00539b; */
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    /* display: inline-flex; */
+    height: fit-content;
+  }
+
+  #final_submit {
+    display: block;
+    border: 0.1rem solid #717074;
+    border-color: #00539b;
+    color: #00539b;
+    margin-bottom: 20px;
   }
 
   .btn:hover {
@@ -91,6 +127,8 @@
     height: 20rem;
     padding: 1.5rem;
     font-size: 1.5rem;
+    margin: 0 auto;
+    display: block;
     /* box-shadow: 0 0.1rem 1.4rem 0 rgba(75, 142, 230, 0.5); */
   }
 
@@ -106,15 +144,13 @@
   class="add-answers-form"
   id="input"
   action="/gamebook/scenario"
-  enctype="application/x-www-form-urlencoded"
   method="POST"
 >
   <% } else { %> 
     <form
     class="add-answers-form"
     id="input"
-    action= "/gamebook/edit"
-    enctype="application/x-www-form-urlencoded"
+    action= "/gamebook/scenario/<%= participant_id%> "
     method="POST"
   >
   <% } %> 
@@ -142,7 +178,7 @@
     <p
       class="choice-text font-weight-light text-justify"
       data-number="1"
-      name="answer<%question_id%>"
+      name="answer<%=question_id%>"
       value="1"
     >
       <%= choice1 %>
@@ -181,19 +217,17 @@
   <form>
     <input
       type="text"
-      name="comment<%question_id%> "
-      id="comment"
+      name="answer<%=question_id%>"
       placeholder="Please elaborate your answer... "
     />
+    <br>
     <button
-      type="submit"
       class="btn"
-      id="saveDataBtn"
-      onClick="saveScore(event)"
-      disabled
-    >
-      SUBMIT
-    </button>
+      id="final_submit"
+      type="submit"
+      action="/gamebook/scenario/<%= participant_id%> "
+      method="POST"
+    >SUBMIT</button>
   </form>
   <% } %>
 </div>
@@ -211,6 +245,8 @@
             console.log(selectedAnswer)
         }) 
     })
+
+
 
 </script>
 </body>

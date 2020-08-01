@@ -157,10 +157,6 @@ router.post("/scenario", (req, res) => {
       } else {
         res.redirect(`./scenario/${nonbiased_route}`);
       }
-      // res.send(data)
-      // res.render(`gamebook/scenario`, {
-      //   participant_id: data.id,
-      // });
     }
   });
 });
@@ -184,7 +180,7 @@ router.get("/edit/:participantId", (req, res) => {
 });
 
 //Update participant's answer with participant_id
-router.put(`/edit/:participantId`, (req, res) => {
+router.post(`/scenario/:participantId`, (req, res) => {
   if (!req.body) {
     res.status(400).send({
       message: "Content cannot be empty!",
@@ -192,7 +188,7 @@ router.put(`/edit/:participantId`, (req, res) => {
   }
 
   const answer = new Answer({
-    question1: req.body.answer1,
+    participant_id: participant_id,
     question2: req.body.answer2,
     question3: req.body.answer3,
     question4: req.body.answer4,
@@ -203,20 +199,39 @@ router.put(`/edit/:participantId`, (req, res) => {
     question9: req.body.answer9,
   });
 
-  Answer.updateById(participant_id, answer, (err, data) => {
-    console.log(data);
+  console.log(participant_id);
+  console.log(Object.keys(req.body));
+  console.log(req.body.answer7)
+
+  Answer.updateById(parseInt(req.params.participantId), answer, (err, data) => {
+    // console.log(data);
+    let array = Object.values(answer);
+    let value = array.find((e) => e !== undefined);
+    // console.log(value);
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found participant with id ${participant_id}`,
+          message: `Not found participant with id ${req.params.participant_id}`,
         });
       } else {
         res.status(500).send({
           message:
-            "Error updating Participant with Id" + req.params.participantId,
+            "Error updating Participant with Id" + req.params.participant_id,
         });
       }
-    } else res.send(data);
+    } else if (isNaN(value)) {
+      res.redirect(`./${nonbiased_route}`);
+    } else if (question_id == 9) {
+      res.redirect(`/usability`);
+    } else {
+      // console.log(Object.keys(answer))
+      // console.log(Object.values(answer))
+      if (value == biased_answer) {
+        res.redirect(`./${biased_route}`);
+      } else {
+        res.redirect(`./${nonbiased_route}`);
+      }
+    }
   });
 });
 

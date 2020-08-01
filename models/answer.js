@@ -28,10 +28,10 @@ Answer.insert = (newAnswer, result) => {
   });
 };
 
-Answer.updateById = (id, answer, result) => {
+Answer.updateById = (participant_id, answer, result) => {
     sql.query(
-        "UPDATE control_answers SET question2 = ?, question3 = ?, question4 = ?, question5 = ?, question6 = ?, question7 = ?, question8 = ?, question9 = ? WHERE id = ?",
-        [answer.question2, answer.question3, answer.question4, answer.question5, answer.question6, answer.question7, answer.question8, answer.question9, id],
+        "UPDATE control_answers SET question1 = IFNULL(question1, ?), question2 = IFNULL(question2, ?), question3 = IFNULL(question3, ?), question4 = IFNULL(question4, ?), question5 = IFNULL(question5, ?), question6 = IFNULL(question6, ?), question7 = IFNULL(question7, ?), question8 = IFNULL(question8, ?), question9 = IFNULL(question9, ?) WHERE participant_id = ?",
+        [answer.question1, answer.question2, answer.question3, answer.question4, answer.question5, answer.question6, answer.question7, answer.question8, answer.question9, participant_id],
         (err, res) => {
             if(err) {
                 console.log("error: ", err);
@@ -45,14 +45,14 @@ Answer.updateById = (id, answer, result) => {
                 return; 
             }
 
-            console.log("Updated Answers Participant: ", {id: id, ...answer});
-            result(null, {id: id, ...answer})
+            console.log("Updated Answers Participant: ", {participant_id: participant_id, ...answer});
+            result(null, {participant_id: participant_id, ...answer})
         }
     );
 };
 
-Answer.remove = (id, result) => {
-  sql.query("DELETE FROM control_answers WHERE id = ?", id, (err, res) => {
+Answer.remove = (participant_id, result) => {
+  sql.query("DELETE FROM control_answers WHERE participant_id = ?", participant_id, (err, res) => {
     if(err) {
       console.log("error", err);
       result(null, err);
