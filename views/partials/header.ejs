@@ -43,23 +43,32 @@
       background-position: center;
     }
   </style> -->
-  
+
   <body>
     <div class="page-wrapper">
       <nav class="navbar navbar-light bg-light">
-        
-        <a
-          class="float-right"
-          href="/participants"
-          title="Add a New Participants"
-          > Help </a>
+        <a class="float-right" href="/help" title="Help Page" onclick="displayMessage()"> Help </a>
 
-          <div style="text-align: right"> Researcher: Amy Hu <br />
-            E-mail: <a href=mailto:ah343@st-andrews.ac.uk>ah343@st-andrews.ac.uk</a>
+        <div style="text-align: right;">
+          Researcher: Amy Hu <br />
+          E-mail:
+          <a href="mailto:ah343@st-andrews.ac.uk">ah343@st-andrews.ac.uk</a>
         </div>
 
-          <!-- <span class="navbar-brand"><img src="../logo/uni_logo.png" /> </span> -->
+        <!-- <span class="navbar-brand"><img src="../logo/uni_logo.png" /> </span> -->
       </nav>
     </div>
+
+    <script>
+      // const myfun = () => {
+      //   alert("It looks like you want to leave the page! All changes and your data will be lost.")
+      // };
+
+      const displayMessage = () => {
+        window.onbeforeunload = function () {
+          return "Are you sure you want to leave?";
+        };
+      };
+    </script>
   </body>
 </html>

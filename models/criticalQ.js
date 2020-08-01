@@ -1,7 +1,7 @@
 const sql = require("./db.js");
 
-const CQuestion = function(question) {
-    this.criticalQ_id = question.id
+const CriticalQuestion = function(question) {
+    this.criticalQ_Id = question.id
     this.question_id = question.question_id;
     this.cQuestion1 = question.cQuestion1;
     this.cQuestion2 = question.cQuestion2;
@@ -17,8 +17,8 @@ const CQuestion = function(question) {
 };
 
 
-CQuestion.findById = (questionId, result) => {
-    sql.query(`SELECT * FROM criticalQ WHERE id=${questionId}`, (err, res) => {
+CriticalQuestion.findById = (criticalQ_Id, result) => {
+    sql.query(`SELECT * FROM criticalQ WHERE id=${criticalQ_Id}`, (err, res) => {
         if(err) {
             console.log("error: , err");
             result(err, null);
@@ -36,4 +36,4 @@ CQuestion.findById = (questionId, result) => {
     });
 };
 
-module.exports = CQuestion;
+module.exports = CriticalQuestion;

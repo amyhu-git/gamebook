@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index')
 const gamebookRouter = require('./routes/gamebook')
 const usabilityRouter = require('./routes/usability')
+const helpRouter = require('./routes/help')
 
 //configure middleware
 app.set('view engine', 'ejs') //configure template engine
@@ -20,6 +21,7 @@ app.use(bodyParser.json()); //parse form data client
 app.use('/', indexRouter)
 app.use('/gamebook', gamebookRouter)
 app.use('/usability', usabilityRouter)
+app.use('/help', helpRouter)
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Server listening at ${process.env.PORT || 3000}`)

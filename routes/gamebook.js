@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Participant = require("../models/participant");
 const Question = require("../models/gamebook");
-const CQuestion = require("../models/criticalQ");
+const CriticalQuestion = require("../models/criticalQ");
 const Answer = require("../models/answer");
 const { get } = require("http");
 const { isBuffer } = require("util");
@@ -188,7 +188,6 @@ router.post(`/scenario/:participantId`, (req, res) => {
   }
 
   const answer = new Answer({
-    participant_id: participant_id,
     question2: req.body.answer2,
     question3: req.body.answer3,
     question4: req.body.answer4,
@@ -201,12 +200,14 @@ router.post(`/scenario/:participantId`, (req, res) => {
 
   console.log(participant_id);
   console.log(Object.keys(req.body));
-  console.log(req.body.answer7)
+  console.log(req.body.answer7);
 
   Answer.updateById(parseInt(req.params.participantId), answer, (err, data) => {
     // console.log(data);
     let array = Object.values(answer);
     let value = array.find((e) => e !== undefined);
+    console.log("Answer" + value);
+    console.log("Biased answer value:" + biased_answer);
     // console.log(value);
     if (err) {
       if (err.kind === "not_found") {
@@ -224,8 +225,6 @@ router.post(`/scenario/:participantId`, (req, res) => {
     } else if (question_id == 9) {
       res.redirect(`/usability`);
     } else {
-      // console.log(Object.keys(answer))
-      // console.log(Object.values(answer))
       if (value == biased_answer) {
         res.redirect(`./${biased_route}`);
       } else {
@@ -284,22 +283,70 @@ router.post(`/scenario/:participantId`, (req, res) => {
 //   });
 // });
 
-router.get(`/cScenario/:cquestionId`, (req, res) => {
-  CQuestion.findById(req.params.cquestionId, (err, data) => {
+router.get(`/cScenario/:questionId`, (req, res) => {
+  // CriticalQuestion.findById(req.params.criticalQ_Id, (err, data) => {
+  //   let allData = Object.assign(...data);
+  //   if (err) {
+  //     if (err.kind === "not_found") {
+  //       res.status(404).send({
+  //         message: `Not found Question with id ${req.params.criticalQ_Id}`,
+  //       });
+  //     } else {
+  //       res.status(500).send({
+  //         message:
+  //           "Error retrieving Question with id " + req.params.critical_Id,
+  //       });
+  //     }
+  //   } else {
+  //     // res.send(data.cQuestion1)
+  //     res.render("gamebook/cScenario", {
+  //       criticalQ_Id: allData.id,
+  //       cQuestion1: allData.cQuestion1,
+  //       cQuestion2: allData.cQuestion2,
+  //       cQuestion3: allData.cQuestion3,
+  //       cQuestion4: allData.cQuestion4,
+  //       decisionQuestion: allData.decisionQuestion,
+  //       choice1: allData.choice1,
+  //       choice2: allData.choice2,
+  //       choice3: allData.choice3,
+  //       alternative1: allData.alternative1,
+  //       alternative2: allData.alternative2,
+  //       alternative3: allData.alternative3,
+  //     });
+  //   }
+  // });
+
+
+  Question.findById(req.params.questionId, (err, data) => {
+    question_id = data.id;
+    biased_answer = data.biased_answer;
+    biased_route = data.biased_route;
+    nonbiased_route = data.nonbiased_route;
+
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
-          message: `Not found Question with id ${req.params.cquestionId}`,
+          message: `Not found Question with id ${req.params.questionId}`,
         });
       } else {
         res.status(500).send({
-          message:
-            "Error retrieving Question with id " + req.params.cquestionId,
+          message: "Error retrieving Question with id " + req.params.questionId,
         });
       }
     } else
       res.render("gamebook/cScenario", {
-        criticalQ_id: data.id,
+        participant_id: participant_id,
+        question_id: data.id,
+        scenario: data.scenario,
+        letter: data.letter,
+        question: data.question,
+        choice1: data.choice1,
+        choice2: data.choice2,
+        choice3: data.choice3,
+        choice4: data.choice4,
+        biased_answer: data.biased_answer,
+        biased_route: data.biased_route,
+        nonbiased_route: data.nonbiased_route,
         cQuestion1: data.cQuestion1,
         cQuestion2: data.cQuestion2,
         cQuestion3: data.cQuestion3,
