@@ -1,5 +1,6 @@
 const sql = require("./db.js");
 
+//constructor
 const Answer = function (answer) {
   this.participant_id = answer.participant_id;
   this.question1 = answer.question1;
@@ -13,6 +14,7 @@ const Answer = function (answer) {
   this.question9 = answer.question9;
 };
 
+//create new answer for participant
 Answer.insert = (newAnswer, result) => {
   sql.query(`INSERT INTO control_answers SET ?`, newAnswer, (err, res) => {
     if (err) {
@@ -28,6 +30,7 @@ Answer.insert = (newAnswer, result) => {
   });
 };
 
+//update answer based on participant id
 Answer.updateById = (participant_id, answer, result) => {
   sql.query(
     "UPDATE control_answers SET question1 = IFNULL(question1, ?), question2 = IFNULL(question2, ?), question3 = IFNULL(question3, ?), question4 = IFNULL(question4, ?), question5 = IFNULL(question5, ?), question6 = IFNULL(question6, ?), question7 = IFNULL(question7, ?), question8 = IFNULL(question8, ?), question9 = IFNULL(question9, ?) WHERE participant_id = ?",
@@ -65,6 +68,7 @@ Answer.updateById = (participant_id, answer, result) => {
   );
 };
 
+//delete answers with participant id
 Answer.remove = (participant_id, result) => {
   sql.query(
     "DELETE FROM control_answers WHERE participant_id = ?",

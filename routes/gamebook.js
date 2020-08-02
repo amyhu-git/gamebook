@@ -2,15 +2,18 @@ const express = require("express");
 const router = express.Router();
 const Participant = require("../models/participant");
 const Question = require("../models/gamebook");
-const CriticalQuestion = require("../models/criticalQ");
 const Answer = require("../models/answer");
 const Usability = require("../models/usability");
+// const CriticalQuestion = require("../models/criticalQ");
+
 const { get } = require("http");
 const { isBuffer } = require("util");
 
+//global variables
 let participant_id;
 let question_id;
 let biased_answer;
+let unrelated_answer;
 let biased_route;
 let nonbiased_route;
 
@@ -73,28 +76,19 @@ router.post("/", (req, res) => {
   }
 });
 
-//get all questions
-// router.get("/allQuestions", (req, res) => {
-//   Question.getAll((err, data) => {
-//     if (err)
-//       res.status(500).send({
-//         message:
-//           err.message || "Some error occurred while retrieving Questions.",
-//       });
-//     else {
-//       res.send(data);
-//     }
-//   });
-// });
+/////////////////////// CONTROL CONDITION SCENARIO PATH //////////////////////////////
 
+//intro to scenario route
 router.get("/part2", (req, res) => {
   res.render("gamebook/part2");
 });
 
+//retrieving questions by id
 router.get(`/scenario/:questionId`, (req, res) => {
   Question.findById(req.params.questionId, (err, data) => {
     question_id = data.id;
     biased_answer = data.biased_answer;
+    unrelated_answer = data.unrelated_answer;
     biased_route = data.biased_route;
     nonbiased_route = data.nonbiased_route;
 
@@ -120,14 +114,11 @@ router.get(`/scenario/:questionId`, (req, res) => {
         choice3: data.choice3,
         choice4: data.choice4,
         biased_answer: data.biased_answer,
+        unrelated_answer: data.unrelated_answer,
         biased_route: data.biased_route,
         nonbiased_route: data.nonbiased_route,
       });
   });
-});
-
-router.get("/partB", (req, res) => {
-  res.render("gamebook/partB");
 });
 
 //create new participant route
@@ -145,9 +136,6 @@ router.post("/scenario", (req, res) => {
     question9: req.body.answer9,
   });
 
-  // console.log(question_id);
-  // console.log("Biased answer" + biased_answer);
-
   Answer.insert(answer, (err, data) => {
     if (err)
       res.status(500).send({
@@ -161,24 +149,6 @@ router.post("/scenario", (req, res) => {
         res.redirect(`./scenario/${nonbiased_route}`);
       }
     }
-  });
-});
-
-//get single participant
-router.get("/edit/:participantId", (req, res) => {
-  Participant.findById(req.params.participantId, (err, data) => {
-    if (err) {
-      if (err.kind === "not found") {
-        res.status(404).send({
-          message: `Not found participant with id ${req.params.participantId}.`,
-        });
-      } else {
-        res.status(500).send({
-          message:
-            "Error retrieving participant with id" + req.params.participantId,
-        });
-      }
-    } else res.send(JSON.stringify(data));
   });
 });
 
@@ -201,16 +171,16 @@ router.post(`/scenario/:participantId`, (req, res) => {
     question9: req.body.answer9,
   });
 
-  console.log(participant_id);
-  console.log(Object.keys(req.body));
-  console.log(req.body.answer7);
+  // console.log(participant_id);
+  // console.log(Object.keys(req.body));
+  // console.log(req.body.answer7);
 
   Answer.updateById(parseInt(req.params.participantId), answer, (err, data) => {
     // console.log(data);
     let array = Object.values(answer);
     let value = array.find((e) => e !== undefined);
-    console.log("Answer" + value);
-    console.log("Biased answer value:" + biased_answer);
+    // console.log("Answer" + value);
+    // console.log("Biased answer value:" + biased_answer);
     // console.log(value);
     if (err) {
       if (err.kind === "not_found") {
@@ -228,7 +198,8 @@ router.post(`/scenario/:participantId`, (req, res) => {
     } else if (question_id == 9) {
       res.redirect(`/gamebook/usability`);
     } else {
-      if (value == biased_answer) {
+      if (value == biased_answer || value == unrelated_answer) {
+        //defining path depending on answer
         res.redirect(`./${biased_route}`);
       } else {
         res.redirect(`./${nonbiased_route}`);
@@ -236,6 +207,8 @@ router.post(`/scenario/:participantId`, (req, res) => {
     }
   });
 });
+
+///////////////////// USABILITY QUESTIONS /////////////////////////////
 
 router.get("/usability", (req, res) => {
   res.render("usability/index");
@@ -266,6 +239,14 @@ router.post("/usability", (req, res) => {
   });
 });
 
+/////////////////////////// EXPERIMENTAL CONDITION ///////////////////////////
+
+//intro
+router.get("/partB", (req, res) => {
+  res.render("gamebook/partB");
+});
+
+//retrieve questions by id
 router.get(`/cScenario/:questionId`, (req, res) => {
   Question.findById(req.params.questionId, (err, data) => {
     question_id = data.id;
@@ -342,6 +323,39 @@ router.get(`/cScenario/:questionId`, (req, res) => {
 //       alternative3: allData.alternative3,
 //     });
 //   }
+// });
+
+//get all questions route
+
+// router.get("/allQuestions", (req, res) => {
+//   Question.getAll((err, data) => {
+//     if (err)
+//       res.status(500).send({
+//         message:
+//           err.message || "Some error occurred while retrieving Questions.",
+//       });
+//     else {
+//       res.send(data);
+//     }
+//   });
+// });
+
+// //get participant
+// router.get("/edit/:participantId", (req, res) => {
+//   Participant.findById(req.params.participantId, (err, data) => {
+//     if (err) {
+//       if (err.kind === "not found") {
+//         res.status(404).send({
+//           message: `Not found participant with id ${req.params.participantId}.`,
+//         });
+//       } else {
+//         res.status(500).send({
+//           message:
+//             "Error retrieving participant with id" + req.params.participantId,
+//         });
+//       }
+//     } else res.send(JSON.stringify(data));
+//   });
 // });
 
 module.exports = router;

@@ -1,17 +1,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" type="type/css" href="/css/style.css" />
 
+<title>Error page</title>
 <body>
   <div class="container">
     <div class="flex-center flex-column">
       <% if(message) { %>
-        <hr>
-        <h1 class="text-justify text-center" ><%= message %></h1>
-        <hr />
-        <a class="btn" href="./gamebook/part1"> TRY AGAIN </a>
+      <hr />
+      <h1 class="text-justify text-center"><%= message %></h1>
+      <hr />
+      <a class="btn" href="./gamebook/part1"> TRY AGAIN </a>
       <% } else { %>
-        <p>No error message.</p>
+      <p>No error message.</p>
       <% } %>
-  </div>
+    </div>
   </div>
 </body>

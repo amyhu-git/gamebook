@@ -1,5 +1,6 @@
 const sql = require("./db.js");
 
+//constructor
 const Participant = function (participant) {
   this.participation_condition = participant.participation_condition;
   this.age_group = participant.age_group;
