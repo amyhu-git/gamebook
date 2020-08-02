@@ -1,25 +1,17 @@
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../css/style.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" type="type/css" href="/css/style.css" />
 
 <body>
-<% if(message) { %>
-<div class="container">
-  <div class="flex-cener flex-column">
-    <h1 class="text-justify text-center"><%= message %></h1>
-    <hr >
-    <a class="btn" href="./gamebook/part1"> TRY AGAIN </a>
+  <div class="container">
+    <div class="flex-center flex-column">
+      <% if(message) { %>
+        <hr>
+        <h1 class="text-justify text-center" ><%= message %></h1>
+        <hr />
+        <a class="btn" href="./gamebook/part1"> TRY AGAIN </a>
+      <% } else { %>
+        <p>No error message.</p>
+      <% } %>
   </div>
-</div>
-
-<% } else { %>
-<p>No error message.</p>
-<% } %>
-
+  </div>
 </body>
-
-<!-- <div class="container">
-        <p> Error please </p>
-    </div>
-    <h1>Test</h1> -->
-
-

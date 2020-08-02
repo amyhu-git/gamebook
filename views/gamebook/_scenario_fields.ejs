@@ -12,229 +12,110 @@
     crossorigin="anonymous"
   />
 
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
 
 
-<style>
-  @font-face {
-    font-family: "Ink Free";
-    src: url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.eot");
-    src: url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.eot?#iefix")
-        format("embedded-opentype"),
-      url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.woff2")
-        format("woff2"),
-      url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.woff")
-        format("woff"),
-      url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.ttf")
-        format("truetype"),
-      url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.svg#Ink Free")
-        format("svg");
-  }
-
-  #letter {
-    font-size: 25px;
-    font-family: "Ink Free";
-  }
-
-  /* BUTTONS */
-  .btn {
-    text-align: center;
-    font-size: 1.2rem;
-    /* padding: 1rem 0;
-    width: 20rem;
-    border: 0.1rem solid #717074;
-    /* margin-bottom: 1rem; */
-    /* text-decoration: none;
-    border: 0.1rem solid #00539b;
-    color: #00539b; */
-    background-color: white;
-    margin-left: auto;
-    margin-right: auto;
-    /* display: inline-flex; */
-    height: fit-content;
-  }
-
-  #final_submit {
-    display: block;
-    border: 0.1rem solid #717074;
-    border-color: #00539b;
-    color: #00539b;
-    margin-bottom: 20px;
-  }
-
-  .btn:hover {
-    cursor: pointer;
-    /* box-shadow: 0 0.4rem 1.4rem 0 rgba(75, 142, 230, 0.534); */
-    border: 0.1rem solid #717074;
-    transform: translateY(-0.1rem);
-    transition: transform 150ms;
-  }
-
-  .btn[disabled]:hover {
-    cursor: not-allowed;
-    box-shadow: none;
-    transform: none;
-  }
-
-  .choice-container {
-    display: flex;
-    margin-bottom: 0.5rem;
-    width: 100%;
-    font-size: 1.8rem;
-    border: 0.1rem solid rgb(86, 165, 235, 0.25);
-    background-color: white;
-  }
-
-  .choice-container:hover {
-    cursor: pointer;
-    box-shadow: 0 0.4rem 1.4rem 0 rgba(221, 221, 221, 0.5);
-    transform: translateY(-0.1rem);
-    transition: transform 150ms;
-  }
-
-  .choice-prefix {
-    padding: 1.5rem 2.5rem;
-    background-color: #00539b;
-    color: white;
-    margin-bottom: 0;
-    margin-top: 0;
-  }
-
-  .choice-text {
-    padding: 1.5rem;
-    width: 100%;
-    margin-bottom: 0;
-    margin-top: 0;
-  }
-
-  .correct,
-  .incorrect {
-    background-color: rgb(207, 207, 207);
-  }
-
-  /* FORMS */
-  form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  input {
-      margin-bottom: 3rem;
-      width: 50rem;
-      height: 20rem;
-      padding: 1.5rem;
-      font-size: 1.3rem;
-      margin: 0 auto;
-      display: block;
-      /* border: thin; */
-      /* box-shadow: 0 0.1rem 1.4rem 0 rgba(75, 142, 230, 0.5); */
-    }
-
-    input::placeholder {
-      color: #aaa;
-    }
-</style>
-<br />
-
 <body>
+
+<div class="container">
+  <div id="home" class="flex-center flex-column">
   <% if( question_id < 2) { %> 
-<form
-  class="add-answers-form"
-  id="input"
-  action="/gamebook/scenario"
-  method="POST"
->
-  <% } else { %> 
-    <form
+  <form
     class="add-answers-form"
     id="input"
-    action= "/gamebook/scenario/<%= participant_id%> "
+    action="/gamebook/scenario"
     method="POST"
   >
-  <% } %> 
-<h2>Participant ID: <%= participant_id %> ***REMOVE THIS LATER</h2>
-
-<% if (question) { %>
-<div class="container">
-  <hr />
-  <h3 class="font-weight-light text-justify" id="scenario"><%= scenario %></h3>
-  <hr />
-  <% if (letter) { %>
-  <p class="text-justify text-lg" id="letter">
-    <%=letter %>
-  </p>
-  <% } %>
-  <br />
-  <h3 class="text-justify" id="question" name="question_id" value="<%= question_id %> "> 
-    <%= question %>
-  </h3>
-  <p>Question ID: <%= question_id %> ****REMOVE THIS LATER</p>
-  <br />
-  <% if (choice1) { %>
-  <button type="submit" class="btn choice-container"  id="answer<%=question_id%>" name="answer<%=question_id%>" value="1">
-    <p class="choice-prefix">A</p>
-    <p
-      class="choice-text font-weight-light text-justify"
-      data-number="1"
-      name="answer<%=question_id%>"
-      value="1"
-    >
-      <%= choice1 %>
-    </p>
-    <p class="text-justify" id="question" name="question_id" value="<%=question_id%> "></p>
-  </button>
-  <button type="submit" class="btn choice-container" name="answer<%=question_id%>" value="2">
-    <p class="choice-prefix">B</p>
-    <p
-      class="choice-text font-weight-light text-justify"
-      data-number="2"
-    >
-      <%= choice2 %>
-    </p>
-  </button>
-  <button type="submit" class="btn choice-container" name="answer<%=question_id%>" value="3">
-    <p class="choice-prefix">C</p>
-    <p
-      class="choice-text font-weight-light text-justify"
-      data-number="3"
-    >
-      <%= choice3 %>
-    </p>
-  </button>
-  <% if(choice4) { %>
-  <button type="submit" class="btn choice-container" name="answer<%=question_id%>" value="4">
-    <p class="choice-prefix">C</p>
-    <p
-      class="choice-text font-weight-light text-justify"
-      data-number="4"
-    >
-      <%= choice4 %>
-    </p>
-  </button>
-  <% } %> <% } else {%>
-  <form>
-    <input
-      type="text"
-      name="answer<%=question_id%>"
-      placeholder="Please elaborate your answer... "
-    />
-    <br>
-    <button
-      class="btn"
-      id="final_submit"
-      type="submit"
-      action="/gamebook/scenario/<%= participant_id%> "
+    <% } else { %> 
+      <form
+      class="add-answers-form"
+      id="input"
+      action= "/gamebook/scenario/<%= participant_id%> "
       method="POST"
-    >SUBMIT</button>
-  </form>
+    >
+    <% } %> 
+    <br>
+  
+  <div class="container">
+  <% if (question) { %>
+    <hr />
+    <h3 class="font-weight-light text-justify" id="scenario"><%= scenario %></h3>
+    <hr />
+    <% if (letter) { %>
+    <p class="text-justify text-lg" id="letter">
+      <%=letter %>
+    </p>
+    <% } %>
+    <h3 class="text-justify" id="question" name="question_id" value="<%= question_id %> "> 
+      <%= question %>
+    </h3>
+    <p>Question ID: <%= question_id %> ****REMOVE THIS LATER</p>
+    <br />
+    <% if (choice1) { %>
+    <button type="submit" class="btn choice-container"  id="answer<%=question_id%>" name="answer<%=question_id%>" value="1">
+      <p class="choice-prefix">A</p>
+      <p
+        class="choice-text font-weight-light text-justify"
+        data-number="1"
+        name="answer<%=question_id%>"
+        value="1"
+      >
+        <%= choice1 %>
+      </p>
+      <p class="text-justify" id="question" name="question_id" value="<%=question_id%> "></p>
+    </button>
+    <button type="submit" class="btn choice-container" name="answer<%=question_id%>" value="2">
+      <p class="choice-prefix">B</p>
+      <p
+        class="choice-text font-weight-light text-justify"
+        data-number="2"
+      >
+        <%= choice2 %>
+      </p>
+    </button>
+    <button type="submit" class="btn choice-container" name="answer<%=question_id%>" value="3">
+      <p class="choice-prefix">C</p>
+      <p
+        class="choice-text font-weight-light text-justify"
+        data-number="3"
+      >
+        <%= choice3 %>
+      </p>
+    </button>
+    <% if(choice4) { %>
+    <button type="submit" class="btn choice-container" name="answer<%=question_id%>" value="4">
+      <p class="choice-prefix">C</p>
+      <p
+        class="choice-text font-weight-light text-justify"
+        data-number="4"
+      >
+        <%= choice4 %>
+      </p>
+    </button>
+    <% } %> <% } else {%>
+    <form>
+      <input
+        type="text"
+        name="answer<%=question_id%>"
+        id="comment"
+        placeholder="Please elaborate your answer... "
+      />
+      <br>
+      <button
+        class="btn"
+        id="final_submit"
+        type="submit"
+        action="/gamebook/scenario/<%= participant_id%> "
+        method="POST"
+      >SUBMIT</button>
+    </form>
+    <% } %>
   <% } %>
+  </div>
+  </form>
 </div>
-<% } %>
-</form>
-
+</div>
 <script>
     const choices = Array.from(document.getElementsByClassName("choice-text"));
     let selectedAnswer

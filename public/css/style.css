@@ -1,3 +1,4 @@
+/*LOGO*/
 img {
   display: block;
   width: 40%;
@@ -5,6 +6,7 @@ img {
   margin-bottom: 2rem;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 2rem;
 }
 
 .hero-unit {
@@ -22,23 +24,23 @@ img {
   padding: 0;
   color: #333;
 } */
-/* 
+
 h1,
 h2,
 h3,
 h4 {
   margin-bottom: 1rem;
-} */
+  margin-top: 1.5rem;
+}
 
 .container {
-  /* width: 100vw;
-  height: 100vh; */
-  display: flex;
-  justify-content: center; /*horizontal center*/
-  align-items: center; /*vertically center*/
-  max-width: 90rem;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  /* max-width: 90rem; */
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -47,7 +49,7 @@ h4 {
 }
 
 .flex-column {
-  display: flex;
+  display: block;
   flex-direction: column;
 }
 
@@ -71,22 +73,150 @@ h4 {
 /* BUTTONS */
 .btn {
   text-align: center;
-  /* font-size: 1.8rem; */
-  /* padding: 1rem 0;
-  width: 20rem;
-  border: 0.1rem solid #717074;
-  /* margin-bottom: 1rem; */
+  font-size: 1.5rem;
+  padding: 1rem 1.5;
+  /* width: 20rem; */
+  border: 0.01rem solid #b9b8bb;
+  margin-bottom: 1rem;
   text-decoration: none;
-  border: 0.1rem solid #00539b;
+  border: 0.01rem solid #00539b;
   color: #00539b;
   background-color: white;
   margin-left: auto;
   margin-right: auto;
-  /* width: fit-content; */
+  width: fit-content;
   display: inline-flex;
   height: fit-content;
   width: fit-content;
+}
 
+.btn:hover {
+  cursor: pointer;
+  /* box-shadow: 0 0.4rem 1.4rem 0 rgba(75, 142, 230, 0.534); */
+  border: 0.1rem solid #717074;
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+}
+
+.btn[disabled]:hover {
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.choice-container {
+  display: flex;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  font-size: 1.8rem;
+  border: 0.1rem solid rgb(86, 165, 235, 0.25);
+  background-color: white;
+}
+
+.choice-container:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(221, 221, 221, 0.5);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+}
+
+.choice-prefix {
+  padding: 1.5rem 2.5rem;
+  background-color: #00539b;
+  color: white;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.choice-text {
+  padding: 1.5rem;
+  width: 100%;
+  margin-bottom: 0;
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: black;
+}
+
+/*LETTER*/
+
+@font-face {
+  font-family: "Ink Free";
+  src: url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.eot");
+  src: url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.svg#Ink Free")
+      format("svg");
+}
+
+#letter {
+  font-size: 25px;
+  font-family: "Ink Free";
+}
+
+/* FORMS */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.checkbox-form {
+  align-items: flex-start;
+  display: inline-block;
+  /* align-items: center; */
+}
+
+.form-check-input {
+  position: relative;
+}
+
+.form-check-label {
+  font-size: larger;
+  display: contents;
+}
+
+.add-participant-form {
+  width: 50%;
+  align-items: center;
+  display: inline-block;
+}
+
+/*INPUT BOX*/
+
+#comment {
+  margin-bottom: 3rem;
+  width: 50rem;
+  height: 20rem;
+  padding: 1.5rem;
+  font-size: 1.4rem;
+  /* border: none; */
+  /* box-shadow: 0 0.1rem 1.4rem 0 rgba(75, 142, 230, 0.5); */
+}
+
+#comment::placeholder {
+  color: #aaa;
+}
+
+/*FLEX BAR*/
+
+.d-flex {
+  margin-top: 3rem;
+  margin-bottom: 2.5rem;
+}
+
+#decisionComment {
+  width: 20rem;
+  height: 3rem;
+  float: left;
+  margin-bottom: 3rem;
+  padding: 1.5rem;
 }
 
 /* HUD */
@@ -138,49 +268,3 @@ h4 {
       transform: rotate(360deg);
     }
   } */
-
-.btn:hover {
-  cursor: pointer;
-  /* box-shadow: 0 0.4rem 1.4rem 0 rgba(75, 142, 230, 0.534); */
-  border: 0.1rem solid #717074;
-  transform: translateY(-0.1rem);
-  transition: transform 150ms;
-}
-
-.btn[disabled]:hover {
-  cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
-}
-
-.choice-container {
-  display: flex;
-  margin-bottom: 0.5rem;
-  width: 100%;
-  font-size: 1.8rem;
-  border: 0.1rem solid rgb(86, 165, 235, 0.25);
-  background-color: white;
-}
-
-.choice-container:hover {
-  cursor: pointer;
-  box-shadow: 0 0.4rem 1.4rem 0 rgba(221, 221, 221, 0.5);
-  transform: translateY(-0.1rem);
-  transition: transform 150ms;
-}
-
-.choice-prefix {
-  padding: 1.5rem 2.5rem;
-  background-color: #00539b;
-  color: white;
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
-.choice-text {
-  padding: 1.5rem;
-  width: 100%;
-  margin-bottom: 0;
-  margin-top: 0;
-  font-size: x-small;
-}

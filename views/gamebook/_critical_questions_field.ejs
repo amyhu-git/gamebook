@@ -10,45 +10,20 @@
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
     crossorigin="anonymous"
-  />
-    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    />
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css" >
+    
   </head>
 
-  <style>
-    @font-face {
-    font-family: "Ink Free";
-    src: url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.eot");
-    src: url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.eot?#iefix")
-        format("embedded-opentype"),
-      url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.woff2")
-        format("woff2"),
-      url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.woff")
-        format("woff"),
-      url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.ttf")
-        format("truetype"),
-      url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.svg#Ink Free")
-        format("svg");
-  }
 
-  #letter {
-    font-size: 25px;
-    font-family: "Ink Free";
-  }
-
-  .form-check-input {
-    position: relative;
-  }
-
-  .form-check-label {
-    font-size: larger;
-  }
-  </style>
 
   <body>
 
     <div class="container">
       <div id="instruction" class="flex-center flex-column">
         <div class="form-group">
+          <hr>
           <h3 class="font-weight-light text-justify" id="scenario"><%= scenario %></h3>
           <hr />
           <% if (letter) { %>
@@ -58,9 +33,8 @@
           <% } %>
           <p>Question ID: <%= question_id %> ****REMOVE THIS LATER</p>
           <% if (cQuestion1) { %> 
-          <br />
           <hr>
-          <form>
+          <form class="checkbox-form">
           <h5 class="text-justify" name="cQuestion<%=question_id%>">
           1. <%= cQuestion1%>
           </h5>
@@ -107,7 +81,7 @@
             </div>
           <% } %> 
         </form>
-        <form>
+        <form class="checkbox-form">
             <hr>
             <h5 class="text-justify" name="cQuestion<%= question_id%>">
             2. <%= cQuestion2%>
@@ -130,8 +104,8 @@
                 Unsure
               </div>
           </form>
-          <form>
           <% if(cQuestion3) { %>
+            <form class="checkbox-form">
               <hr>
               <h5 class="text-justify" name="cQuestion<%= question_id%>">
              3. <%= cQuestion3%>
@@ -153,10 +127,11 @@
             <label class="form-check-label" name="cQuestion<%= question_id %>">
               Unsure
             </div>
+            </form>
           <% } %>  
-          </form>
-          <form>
+          
           <% if(cQuestion4) { %> 
+            <form class="checkbox-form"></form>
             <hr>
             <h5 class="text-justify" name="cQuestion<%= question_id%>">
               4. <%= cQuestion4%>
@@ -178,17 +153,88 @@
                 <label class="form-check-label" name="cQuestion<%= question_id %>">
                   Unsure
                 </div>
-          <% } %> 
-        </form>
+              </form>
+          <% } %>   
         <% }%> 
 
-          <br />
-          <h3 class="text-justify" id="question" name="question_id" value="<%= question_id %> "> 
+          <hr>
+          <hr>
+          <h4 class="text-justify" id="question" name="question_id" value="<%= question_id %> "> 
             <%= question %>
-          </h3>
-        </div>
-      </div>
+          </h4>
+
+          <br />
+          <% if(choice1) { %> 
+            <button type="submit" class="btn choice-container"  id="answer<%=question_id%>" name="answer<%=question_id%>" value="1">
+              <p class="choice-prefix">A</p>
+              <p
+                class="choice-text font-weight-light text-justify"
+                data-number="1"
+                name="answer<%=question_id%>"
+                value="1"
+              >
+                <%= choice1 %>
+              </p>
+              <p class="text-justify" id="question" name="question_id" value="<%=question_id%> "></p>
+            </button>
+            <button type="submit" class="btn choice-container" name="answer<%=question_id%>" value="2">
+              <p class="choice-prefix">B</p>
+              <p
+                class="choice-text font-weight-light text-justify"
+                data-number="2"
+              >
+                <%= choice2 %>
+              </p>
+            </button>
+            <button type="submit" class="btn choice-container" name="answer<%=question_id%>" value="3">
+              <p class="choice-prefix">C</p>
+              <p
+                class="choice-text font-weight-light text-justify"
+                data-number="3"
+              >
+                <%= choice3 %>
+              </p>
+            </button>
+          
+            <% if (choice4) { %> 
+              <button type="submit" class="btn choice-container" name="answer<%=question_id%>" value="4">
+                <p class="choice-prefix">C</p>
+                <p
+                  class="choice-text font-weight-light text-justify"
+                  data-number="4"
+                >
+                  <%= choice4 %>
+                </p>
+              </button>
+            <% } %> 
+          <% } else { %>   
+            <form>
+              <input
+                type="text"
+                name="answer<%=question_id%>"
+                id="comment"
+                placeholder="Please elaborate your answer... "
+              />
+              <br>
+              <button
+                class="btn"
+                id="final_submit"
+                type="submit"
+                action="/gamebook/scenario/<%= participant_id%> "
+                method="POST"
+              >SUBMIT</button>
+            </form>
+          <% } %> 
+          <form class="checkbox-form"></form>
+            <hr>
+            <h4 class="text-justify" name="decisionQuestion">
+              <%= decisionQuestion%>
+              </h4>
+              <input type="text" name="decisionInput" id="decisionComment" placeholder="e.g. 1">
+          </form>
     </div>
+  </div>
+</div>
   
   
     </script>
