@@ -4,6 +4,7 @@ const Participant = require("../models/participant");
 const Question = require("../models/gamebook");
 const CriticalQuestion = require("../models/criticalQ");
 const Answer = require("../models/answer");
+const Usability = require("../models/usability");
 const { get } = require("http");
 const { isBuffer } = require("util");
 
@@ -39,8 +40,10 @@ router.post("/", (req, res) => {
     participation_condition: condition,
     age_group: req.body.age_group,
     gender: req.body.gender,
+    english_skills: req.body.english_skills,
+    language_skills: req.body.language_skills,
+    education: req.body.education,
     date_time: new Date(),
-    // question1: req.body.question1,
   });
 
   if (condition === "0" || condition === "1") {
@@ -142,8 +145,8 @@ router.post("/scenario", (req, res) => {
     question9: req.body.answer9,
   });
 
-  console.log(question_id);
-  console.log("Biased answer" + biased_answer);
+  // console.log(question_id);
+  // console.log("Biased answer" + biased_answer);
 
   Answer.insert(answer, (err, data) => {
     if (err)
@@ -223,7 +226,7 @@ router.post(`/scenario/:participantId`, (req, res) => {
     } else if (isNaN(value)) {
       res.redirect(`./${nonbiased_route}`);
     } else if (question_id == 9) {
-      res.redirect(`/usability`);
+      res.redirect(`/gamebook/usability`);
     } else {
       if (value == biased_answer) {
         res.redirect(`./${biased_route}`);
@@ -234,89 +237,36 @@ router.post(`/scenario/:participantId`, (req, res) => {
   });
 });
 
-// Participant.updateById(
-//   req.params.participantId,
-//   new Participant(req.body),
-//   (err, data) => {
-//     console.log(data);
-//     if (err) {
-//       if (err.kind === "not_found") {
-//         res.status(404).send({
-//           message: `Not found User with id ${req.params.participantId}`,
-//         });
-//       } else {
-//         res.status(500).send({
-//           message: "Error updating User with id " + req.params.participantId,
-//         });
-//       }
-//     }
-//   }
-// );
+router.get("/usability", (req, res) => {
+  res.render("usability/index");
+});
 
-// router.get(`/add/:questionId`, (req, res) => {
-//   Question.findById(req.params.questionId, (err, data) => {
-//     question_id = data.id;
-//     biased_answer = data.biased_answer;
-//     if (err) {
-//       if (err.kind === "not_found") {
-//         res.status(404).send({
-//           message: `Not found Question with id ${req.params.questionId}`,
-//         });
-//       } else {
-//         res.status(500).send({
-//           message: "Error retrieving Question with id " + req.params.questionId,
-//         });
-//       }
-//     } else
-//       res.render("gamebook/add", {
-//         participant_id: participant_id,
-//         question_id: data.id,
-//         scenario: data.scenario,
-//         letter: data.letter,
-//         question: data.question,
-//         choice1: data.choice1,
-//         choice2: data.choice2,
-//         choice3: data.choice3,
-//         choice4: data.choice4,
-//         biased_answer: data.biased_answer,
-//       });
-//   });
-// });
+//create new participant route
+router.post("/usability", (req, res) => {
+  const user = new Usability({
+    participant_id: participant_id,
+    usability1: req.body.usability1,
+    usability2: req.body.usability2,
+    usability3: req.body.usability3,
+    usability4: req.body.usability4,
+    usability5: req.body.usability5,
+    usability6: req.body.usability6,
+    comment: req.body.comment,
+  });
+
+  Usability.insert(user, (err, data) => {
+    if (err) {
+      res.status(500).send({
+        message:
+          err.message || "Something occurred while creating the Participant.",
+      });
+    } else {
+      res.send(data);
+    }
+  });
+});
 
 router.get(`/cScenario/:questionId`, (req, res) => {
-  // CriticalQuestion.findById(req.params.criticalQ_Id, (err, data) => {
-  //   let allData = Object.assign(...data);
-  //   if (err) {
-  //     if (err.kind === "not_found") {
-  //       res.status(404).send({
-  //         message: `Not found Question with id ${req.params.criticalQ_Id}`,
-  //       });
-  //     } else {
-  //       res.status(500).send({
-  //         message:
-  //           "Error retrieving Question with id " + req.params.critical_Id,
-  //       });
-  //     }
-  //   } else {
-  //     // res.send(data.cQuestion1)
-  //     res.render("gamebook/cScenario", {
-  //       criticalQ_Id: allData.id,
-  //       cQuestion1: allData.cQuestion1,
-  //       cQuestion2: allData.cQuestion2,
-  //       cQuestion3: allData.cQuestion3,
-  //       cQuestion4: allData.cQuestion4,
-  //       decisionQuestion: allData.decisionQuestion,
-  //       choice1: allData.choice1,
-  //       choice2: allData.choice2,
-  //       choice3: allData.choice3,
-  //       alternative1: allData.alternative1,
-  //       alternative2: allData.alternative2,
-  //       alternative3: allData.alternative3,
-  //     });
-  //   }
-  // });
-
-
   Question.findById(req.params.questionId, (err, data) => {
     question_id = data.id;
     biased_answer = data.biased_answer;
@@ -362,148 +312,36 @@ router.get(`/cScenario/:questionId`, (req, res) => {
   });
 });
 
-// router.get("/cScenario/:questionId", (req, res) => {
-//   //   Question.findById(req.params.questionId, (err, data) => {
-//   //     if (err) {
-//   //       if (err.kind === "not_found") {
-//   //         res.status(404).send({
-//   //           message: `Not found Question with id ${req.params.questionId}`,
-//   //         });
-//   //       } else {
-//   //         res.status(500).send({
-//   //           message: "Error retrieving Question with id " + req.params.questionId,
-//   //         });
-//   //       }
-//   //     } else
-//   //       res.render("gamebook/cScenario", {
-//   //         scenario: data.scenario,
-//   //         letter: data.letter,
-//   //         question: data.question,
-//   //         choice1: data.choice1,
-//   //         choice2: data.choice2,
-//   //         choice3: data.choice3,
-//   //         choice4: data.choice4,
-//   //         biased_answer: data.biased_answer,
-//   //       });
-//   //   });
-
-//   CQuestion.findById(req.params.questionId, (err, data) => {
-//     if (err) {
-//       if (err.kind === "not_found") {
-//         res.status(404).send({
-//           message: `Not found Question with id ${req.params.questionId}`,
-//         });
-//       } else {
-//         res.status(500).send({
-//           message: "Error retrieving Question with id " + req.params.questionId,
-//         });
-//       }
+// CriticalQuestion.findById(req.params.criticalQ_Id, (err, data) => {
+//   let allData = Object.assign(...data);
+//   if (err) {
+//     if (err.kind === "not_found") {
+//       res.status(404).send({
+//         message: `Not found Question with id ${req.params.criticalQ_Id}`,
+//       });
 //     } else {
-//       res.render("gamebook/cScenario", {
-//         cquestion_id: data.id,
-//         question1: data.cQuestion1,
-//         question2: data.cQuestion2,
-//         question3: data.cQuestion3,
-//         question4: data.cQuestion4,
-//         decisionQuestion: data.decisionQuestion,
-//         cq_choice1: data.choice1,
-//         cq_choice2: data.choice2,
-//         cq_choice3: data.choic3,
-//         alternative1: data.alternative1,
-//         alternative2: data.alternative2,
-//         alternative3: data.alternative3,
+//       res.status(500).send({
+//         message:
+//           "Error retrieving Question with id " + req.params.critical_Id,
 //       });
 //     }
-//     // res.send(data)
-//   });
+//   } else {
+//     // res.send(data.cQuestion1)
+//     res.render("gamebook/cScenario", {
+//       criticalQ_Id: allData.id,
+//       cQuestion1: allData.cQuestion1,
+//       cQuestion2: allData.cQuestion2,
+//       cQuestion3: allData.cQuestion3,
+//       cQuestion4: allData.cQuestion4,
+//       decisionQuestion: allData.decisionQuestion,
+//       choice1: allData.choice1,
+//       choice2: allData.choice2,
+//       choice3: allData.choice3,
+//       alternative1: allData.alternative1,
+//       alternative2: allData.alternative2,
+//       alternative3: allData.alternative3,
+//     });
+//   }
 // });
 
 module.exports = router;
-
-//Create Participant Route
-// router.get("/continue", (req, res) => {
-//   //   participant = { age_group: `${req.body.age_group}`, gender: `${req.body.gender}`, control:`${req.body.control}` };
-//   //   let sql = "INSERT INTO participants SET ?"; //? placeholder
-//   //   db.query(sql, participant, (err, result) => {
-//   //     if (err) throw err;
-//   //     console.log(result);
-//   //     res.send("participant added...");
-//   //   }); //post fills placeholder
-//   //   db.query("SELECT * from players", (err, rows, fields) => {
-//   //     if (!err) {
-//   //       res.send(rows);
-//   //     } else {
-//   //       console.log(err);
-//   //     }
-//   //   });
-//   res.render("participants/continue");
-// });
-
-// router.post("/new" , (req, res) => {
-//      // Validate request
-//      if (!req.body) {
-//         res.status(400).send({
-//           message: "Content can not be empty!",
-//         });
-//       }
-
-//       // Create a User
-//       const participant = new Participant({
-//         age_group: req.body.age_group,
-//         gender: req.body.gender,
-//         condition: req.body.condition,
-//       });
-
-//       console.log(participant)
-
-//       // Save User in the database
-//       Participant.create(participant, (err, data) => {
-//         if (err)
-//           res.status(500).send({
-//             message: err.message || "Some error occurred while creating the User.",
-//           });
-//         else res.send(data);
-//       });
-// })
-
-// res.send(req.body.age_group);
-//   let info = new Object();
-//   info.age_group = req.body.age_group;
-//   info.gender = req.body.gender;
-//   info.control = true;
-
-//   // const participant = new Participant({
-//   //     age_group: req.body.age_group,
-//   //     gender: req.body.gender
-//   // })
-
-//   console.log(info);
-
-//   // participant.save((err, newParticipant) => {
-//   //     if(err){
-//   //         res.render('participants/new', {
-//   //             participant: participant,
-//   //             errorMessage: 'Error creating Participant'
-//   //         })
-//   //     } else {
-//   //         // res.redirect(`participants/${newParticipant.id}`)
-//   //        res.redirect(`participants`)
-//   //     }
-//   // })
-
-//   // Create a User
-//   const participant = new Participant({
-//     age_group: req.body.age_group,
-//     gender: req.body.gender,
-//     control: req.body.control,
-//   });
-
-//   // Save User in the database
-//   Participant.create(participant, (err, data) => {
-//     if (err)
-//       res.status(500).send({
-//         message: err.message || "Some error occurred while creating the User.",
-//       });
-//     else res.send(data);
-//   });
-//   res.send(`I am in age group ${info.age_group} and ${info.gender}`);

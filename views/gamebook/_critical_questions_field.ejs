@@ -21,7 +21,7 @@
   <body>
 
     <div class="container">
-      <div id="instruction" class="flex-center flex-column">
+      <div id="instruction" class="flex-center flex-column" name="<%=question_id%>">
         <div class="form-group">
           <hr>
           <h3 class="font-weight-light text-justify" id="scenario"><%= scenario %></h3>
@@ -35,7 +35,7 @@
           <% if (cQuestion1) { %> 
           <hr>
           <form class="checkbox-form">
-          <h5 class="text-justify" name="cQuestion<%=question_id%>">
+          <h5 class="text-justify" name="cQuestion1">
           1. <%= cQuestion1%>
           </h5>
           <!-- <input class="form-check-input" type="radio" value="1" name="cQuestion<%= question_id %>">
@@ -44,62 +44,62 @@
         
           <% if(question_id == 1 || question_id == 6) { %> 
           <div class="form-check font-weight-light text-justify">
-            <input class="form-check-input" type="radio" value="1" name="cQuestion<%= question_id %>">
-            <label class="form-check-label" name="cQuestion<%= question_id %>">
+            <input class="form-check-input cQuestionX" type="radio" value="1" name="cQuestion1">
+            <label class="form-check-label">
               <%= alternative1 %> 
             </label>
           </div>
           <div class="form-check font-weight-light text-justify">
-            <input class="form-check-input" type="radio" value="2" name="cQuestion<%= question_id %>">
-            <label class="form-check-label" name="cQuestion<%= question_id %>">
+            <input class="form-check-input cQuestionX" type="radio" value="2" name="cQuestion1">
+            <label class="form-check-label">
               <%= alternative2 %> 
             </label>
           </div>
           <div class="form-check font-weight-light text-justify">
-            <input class="form-check-input" type="radio" value="3" name="cQuestion<%= question_id %>">
-            <label class="form-check-label" name="cQuestion<%= question_id %>">
+            <input class="form-check-input cQuestionX" type="radio" value="3" name="cQuestion1">
+            <label class="form-check-label">
               <%= alternative3 %> 
             </label>
           </div>
           <% } else { %> 
           <div class="form-check font-weight-light text-justify">
-            <input class="form-check-input" type="radio" value="1" name="cQuestion<%= question_id %>">
-            <label class="form-check-label" name="cQuestion<%= question_id %>">
+            <input class="form-check-input cQuestionX" type="radio" value="1" name="cQuestion1">
+            <label class="form-check-label">
               Yes
             </label>
           </div>
           <div class="form-check font-weight-light text-justify">
-            <input class="form-check-input" type="radio" value="2" name="cQuestion<%= question_id %>">
-            <label class="form-check-label" name="cQuestion<%= question_id %>">
+            <input class="form-check-input cQuestionX" type="radio" value="2" name="cQuestion1">
+            <label class="form-check-label">
               No
             </label>
           </div>
           <div class="form-check font-weight-light text-justify">
-            <input class="form-check-input" type="radio" value="3" name="cQuestion<%= question_id %>">
-            <label class="form-check-label" name="cQuestion<%= question_id %>">
+            <input class="form-check-input cQuestionX" type="radio" value="3" name="cQuestion1">
+            <label class="form-check-label">
               Unsure
             </div>
           <% } %> 
         </form>
         <form class="checkbox-form">
             <hr>
-            <h5 class="text-justify" name="cQuestion<%= question_id%>">
+            <h5 class="text-justify" name="cQuestion2">
             2. <%= cQuestion2%>
           </h5>
             <div class="form-check font-weight-light text-justify">
-              <input class="form-check-input" type="radio" value="1" name="cQuestion<%= question_id %>">
+              <input class="form-check-input" type="radio" value="1" name="cQuestion2">
               <label class="form-check-label" name="cQuestion<%= question_id %>">
                 Yes 
               </label>
             </div>
             <div class="form-check font-weight-light text-justify">
-              <input class="form-check-input" type="radio" value="2" name="cQuestion<%= question_id %>">
+              <input class="form-check-input" type="radio" value="2" name="cQuestion2">
               <label class="form-check-label" name="cQuestion<%= question_id %>">
                 No
               </label>
             </div>
             <div class="form-check font-weight-light text-justify">
-              <input class="form-check-input" type="radio" value="3" name="cQuestion<%= question_id %>">
+              <input class="form-check-input" type="radio" value="3" name="cQuestion2">
               <label class="form-check-label" name="cQuestion<%= question_id %>">
                 Unsure
               </div>
@@ -107,23 +107,23 @@
           <% if(cQuestion3) { %>
             <form class="checkbox-form">
               <hr>
-              <h5 class="text-justify" name="cQuestion<%= question_id%>">
+              <h5 class="text-justify" name="cQuestion3">
              3. <%= cQuestion3%>
                </h5>
           <div class="form-check font-weight-light text-justify">
-            <input class="form-check-input" type="radio" value="1" name="cQuestion<%= question_id %>">
+            <input class="form-check-input" type="radio" value="1" name="cQuestion3">
             <label class="form-check-label" name="cQuestion<%= question_id %>">
               Yes
             </label>
           </div>
           <div class="form-check font-weight-light text-justify">
-            <input class="form-check-input" type="radio" value="2" name="cQuestion<%= question_id %>">
+            <input class="form-check-input" type="radio" value="2" name="cQuestion3">
             <label class="form-check-label" name="cQuestion<%= question_id %>">
               No
             </label>
           </div>
           <div class="form-check font-weight-light text-justify">
-            <input class="form-check-input" type="radio" value="3" name="cQuestion<%= question_id %>">
+            <input class="form-check-input" type="radio" value="3" name="cQuestion3">
             <label class="form-check-label" name="cQuestion<%= question_id %>">
               Unsure
             </div>
@@ -137,19 +137,19 @@
               4. <%= cQuestion4%>
               </h5>
               <div class="form-check font-weight-light text-justify">
-                <input class="form-check-input" type="radio" value="1" name="cQuestion<%= question_id %>">
+                <input class="form-check-input" type="radio" value="1" name="cQuestion4">
                 <label class="form-check-label" name="cQuestion<%= question_id %>">
                   Yes
                 </label>
               </div>
               <div class="form-check font-weight-light text-justify">
-                <input class="form-check-input" type="radio" value="2" name="cQuestion<%= question_id %>">
+                <input class="form-check-input" type="radio" value="2" name="cQuestion4">
                 <label class="form-check-label" name="cQuestion<%= question_id %>">
                   No
                 </label>
               </div>
               <div class="form-check font-weight-light text-justify">
-                <input class="form-check-input" type="radio" value="3" name="cQuestion<%= question_id %>">
+                <input class="form-check-input" type="radio" value="3" name="cQuestion4">
                 <label class="form-check-label" name="cQuestion<%= question_id %>">
                   Unsure
                 </div>
@@ -230,13 +230,11 @@
             <h4 class="text-justify" name="decisionQuestion">
               <%= decisionQuestion%>
               </h4>
-              <input type="text" name="decisionInput" id="decisionComment" placeholder="e.g. 1">
+              <input type="text" name="decisionQuestion" id="decisionComment" placeholder="e.g. 1">
           </form>
     </div>
   </div>
 </div>
   
-  
-    </script>
   </body>
 </html>

@@ -12,7 +12,7 @@
       crossorigin="anonymous"
     />
 
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
   </head>
 
   <body>
@@ -25,7 +25,6 @@
             action="/gamebook"
             method="POST"
           >
-
             <div class="col-xs-8 col-xs-offset-3">
               <label for="participation_condition">
                 Please enter the <b>participation number</b> given by the
@@ -37,13 +36,14 @@
                 name="participation_condition"
               />
             </div>
-            <br>
+            <br />
             <label for="age_group">Please indicate your age group:</label>
             <select
               class="form-control form-control-lg"
               id="age_group"
               name="age_group"
             >
+              <option value="" disabled selected>Select your option ..</option>
               <option value="1">18-24</option>
               <option value="2">25-34</option>
               <option value="3">35-44</option>
@@ -58,27 +58,170 @@
               id="gender"
               name="gender"
             >
+              <option value="" disabled selected>Select your option ..</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="others">Others</option>
               <option value="na">Rather Not Say</option>
             </select>
-            <hr>
-            <!-- <a class="btn" type="submit" href="/participants/continue" style="color: #00539b">
-                CONTINUE </a
-              > -->
-
-              
-            <button class="btn" type="submit"> CONTINUE </button>
-
-              
-
-            <!-- <button id="submit" onClick="lotteryGame()">PLAY</button> -->
+            <br />
+            <label for="english_skills">Is English your first language?</label>
+            <select
+              class="form-control form-control-lg"
+              name="english_skills"
+              aria-placeholder="Please select ..."
+            >
+              <option value="" disabled selected>Select your option ..</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+              <option value="Unknown">Rather Not Say</option>
+            </select>
+            <br />
+            <label for="language_skills">Are you bilingual?</label>
+            <select class="form-control form-control-lg" name="language_skills">
+              <option value="" disabled selected>Select your option ..</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+              <option value="Unknown">Rather Not Say</option>
+            </select>
+            <br />
+            <label for="education">
+              Please provide your current
+              <b>highest achieved and completed</b> educational level? <br />
+              <p>
+                * Examples for each education level can be found at the end of
+                the page.
+              </p>
+            </label>
+            <select
+              class="form-control form-control-lg"
+              id="education"
+              name="education"
+            >
+              <option value="" disabled selected>Select your option ..</option>
+              <option value="0">Entry</option>
+              <option value="1">Level 1</option>
+              <option value="2">Level 2</option>
+              <option value="3">Level 3</option>
+              <option value="4">Level 4</option>
+              <option value="5">Level 5</option>
+              <option value="6">Level 6</option>
+              <option value="7">Level 7</option>
+              <option value="8">Level 8</option>
+              <option value="9">Rather Not Say</option>
+            </select>
+            <br />
+            <button class="btn" type="submit">CONTINUE</button>
           </form>
+          <hr />
+          <div id="accordion">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <p class="mb-0">
+                  <button
+                    class="btn btn-link"
+                    id="accordion-btn"
+                    data-toggle="collapse"
+                    data-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    Click here to find the definition for each education level.
+                  </button>
+                </p>
+              </div>
+
+              <div
+                id="collapseOne"
+                class="collapse"
+                aria-labelledby="headingOne"
+                data-parent="#accordion"
+              >
+                <div class="card-body">
+                  <h6>ENTRY LEVEL</h6>
+                  <p>
+                    E.g. Entry level award, Entry level certificate (ELC), Entry
+                    level diploma, Entry level English for speakers of other
+                    languages (ESOL), Entry level essential skills, Entry level
+                    functional skills, Skills for Life
+                  </p>
+                  <h6>LEVEL 1</h6>
+                  <p>
+                    First certificate, GCSE (grades 3,2,1 or D, E, F, G).
+                  </p>
+                  <h6>LEVEL 2</h6>
+                  <p>
+                    CSE- grade 1, GCSE (grades 9,8,7,6,5,4 or grades A*, A, B,
+                    C), intermediate apprenticeship, O level (grade A, B, C).
+                  </p>
+                  <h6>LEVEL 3</h6>
+                  <p>
+                    A Level, Access to higher education diploma, advanced
+                    general, AS level, internattional Baccalaureate diploma,
+                    Tech level.
+                  </p>
+                  <h6>LEVEL 4</h6>
+                  <p>
+                    Certificate of higher education (CertHE), Higher
+                    apprenticeship, Higher National certificate.
+                  </p>
+                  <h6>LEVEL 5</h6>
+                  <p>
+                    Diploma of higher education (DipHE), Foundation degree,
+                    Higher national diploma (HND).
+                  </p>
+                  <h6>LEVEL 6</h6>
+                  <p>
+                    Degree apprenticeship, Degree with honours (e.g.BA hons /
+                    BSc hons), Graduate certificate, Graduate diploma, Ordinary
+                    degree without honours.
+                  </p>
+                  <h6>LEVEL 7</h6>
+                  <p>
+                    Integrated master’s degree (for example master of
+                    engineering (MEng)), Master’s degree (for example master of
+                    arts (MA)), Master of science (MSc), Postgraduate
+                    certificate, Postgraduate certificate in education (PGCE),
+                    Postgraduate diploma.
+                  </p>
+                  <h6>LEVEL 8</h6>
+                  <p>
+                    Doctorate, for example doctor of philosophy (PhD or DPhil).
+                  </p>
+                  <hr />
+                  <p>
+                    Further detailes can be found
+                    <a
+                      href="https://www.gov.uk/what-different-qualification-levels-mean/list-of-qualification-levels"
+                    >
+                      at gov.uk.
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- <script src="client.js"></script> -->
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(".collapse").collapse();
+    </script>
   </body>
 </html>

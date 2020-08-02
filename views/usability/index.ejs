@@ -16,40 +16,38 @@
   </head>
 
   <body>
-  <!-- <form
+    <form
       class="add-usability-form"
       id="usability_input"
-      action="/usability"
+      action="/gamebook/usability"
       method="POST"
-    > -->
-    <div class="container">
-      <br />
-      <div id="instruction" class="flex-center flex-column">
-        <div class="form-group">
-       
+    >
+      <div class="container">
+        <br />
+        <div id="instruction" class="flex-center flex-column">
+          <div class="form-group">
             <h1 class="font-weight-light text-center">Part 3</h1>
-            <h3 class="font-weight-light text-justify">
+            <h4 class="font-weight-light text-justify">
               The following questions give you the opportunity to inform us of
               your experience and reactions to the survey system. Your responses
               will help us understand what aspects of the system might have
               supported or disrupted its usability.
-              
-              <br><br>
+
+              <br /><br />
               <b
                 >Please read each statement and indicate how strongly you agree
                 or disagree with the statements. If a statement does not apply
                 to select "N.A.". Any comments to elaborate your answers are
                 welcome.</b
               >
-            </h3>
+            </h4>
             <hr />
-            
 
             <div class="d-flex justify-content-center">
               <span class="font-weight-bold purple-text mr-2 mt-1"
                 >Strongly Agree</span
               >
-              <form class="range-field w-75">
+              <div class="range-field w-75">
                 <h4 class="font-weight-light text-centre">
                   <label for="usability1"
                     >Overall, I am satisfied with how easy it is to use this
@@ -75,7 +73,7 @@
                   for="usability1"
                   >N.A.</output
                 >
-              </form>
+              </div>
               <span class="font-weight-bold purple-text ml-2 mt-1"
                 >Strongly Disagree</span
               >
@@ -86,7 +84,7 @@
               <span class="font-weight-bold purple-text mr-2 mt-1"
                 >Strongly Agree</span
               >
-              <form class="range-field w-75">
+              <div class="range-field w-75">
                 <h4 class="font-weight-light text-centre">
                   <label for="usability2"
                     >I felt comfortable using this system.</label
@@ -111,7 +109,7 @@
                   for="usability2"
                   >N.A.</output
                 >
-              </form>
+              </div>
               <span class="font-weight-bold purple-text ml-2 mt-1"
                 >Strongly Disagree</span
               >
@@ -122,7 +120,7 @@
               <span class="font-weight-bold purple-text mr-2 mt-1"
                 >Strongly Agree</span
               >
-              <form class="range-field w-75">
+              <div class="range-field w-75">
                 <h4 class="font-weight-light text-centre">
                   <label for="usability3"
                     >The information was effective in helping me complete the
@@ -148,7 +146,7 @@
                   for="usability3"
                   >N.A.</output
                 >
-              </form>
+              </div>
               <span class="font-weight-bold purple-text ml-2 mt-1"
                 >Strongly Disagree</span
               >
@@ -159,7 +157,7 @@
               <span class="font-weight-bold purple-text mr-2 mt-1"
                 >Strongly Agree</span
               >
-              <form class="range-field w-75">
+              <div class="range-field w-75">
                 <h4 class="font-weight-light text-centre">
                   <label for="usability4"
                     >The organization of information on the system screens was
@@ -178,14 +176,10 @@
                   oninput="amount4.value=usability4.value"
                   onchange="labelChange(this.id)"
                 />
-                <output
-                  class="font-weight-bold"
-                  id="amount4"
-                  name="amount4"
-                  for="usability4"
+                <output class="font-weight-bold" id="amount4" for="usability4"
                   >N.A.</output
                 >
-              </form>
+              </div>
               <span class="font-weight-bold purple-text ml-2 mt-1"
                 >Strongly Disagree</span
               >
@@ -196,7 +190,7 @@
               <span class="font-weight-bold purple-text mr-2 mt-1"
                 >Strongly Agree</span
               >
-              <form class="range-field w-75">
+              <div class="range-field w-75">
                 <h4 class="font-weight-light text-centre">
                   <label for="usability5"
                     >I liked using the interface of the system.</label
@@ -214,14 +208,10 @@
                   oninput="amount5.value=usability5.value"
                   onchange="labelChange(this.id)"
                 />
-                <output
-                  class="font-weight-bold"
-                  id="amount5"
-                  name="amount5"
-                  for="usability5"
+                <output class="font-weight-bold" id="amount5" for="usability5"
                   >N.A.</output
                 >
-              </form>
+              </div>
               <span class="font-weight-bold purple-text ml-2 mt-1"
                 >Strongly Disagree</span
               >
@@ -232,7 +222,7 @@
               <span class="font-weight-bold purple-text mr-2 mt-1"
                 >Strongly Agree</span
               >
-              <form class="range-field w-75">
+              <div class="range-field w-75">
                 <h4 class="font-weight-light text-centre">
                   <label for="usability6"
                     >Overall, I am satisfied with this system.</label
@@ -250,14 +240,10 @@
                   oninput="amount6.value=usability6.value"
                   onchange="labelChange(this.id)"
                 />
-                <output
-                  class="font-weight-bold"
-                  id="amount6"
-                  name="amount6"
-                  for="usability6"
+                <output class="font-weight-bold" id="amount6" name="amount6"
                   >N.A.</output
                 >
-              </form>
+              </div>
               <span class="font-weight-bold purple-text ml-2 mt-1"
                 >Strongly Disagree</span
               >
@@ -272,28 +258,27 @@
             </h4>
             <input
               type="text"
-              name="usability_comment"
+              name="comment"
               id="comment"
               placeholder="E.g. issues, suggestions, etc. "
             />
             <hr />
             <button class="btn" type="submit">SUBMIT</button>
+          </div>
         </div>
       </div>
     </form>
-    </div>
-  
 
     <script>
-    const labelChange = (id) => {
-          let usabilityRange = document.getElementById(`${id}`)
-          let number = id.substring(id.length-1, id.length)
-          let amount = document.getElementById(`amount${number}`)
+      const labelChange = (id) => {
+        let usabilityRange = document.getElementById(`${id}`);
+        let number = id.substring(id.length - 1, id.length);
+        let amount = document.getElementById(`amount${number}`);
 
-          if(usabilityRange.value === "0") {
-              amount.value = "N.A."
-          };
-    };
+        if (usabilityRange.value === "0") {
+          amount.value = "N.A.";
+        }
+      };
     </script>
   </body>
 </html>

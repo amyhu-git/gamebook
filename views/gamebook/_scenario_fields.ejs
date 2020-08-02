@@ -40,16 +40,16 @@
   <div class="container">
   <% if (question) { %>
     <hr />
-    <h3 class="font-weight-light text-justify" id="scenario"><%= scenario %></h3>
+    <h4 class="font-weight-light text-justify" id="scenario"><%= scenario %></h4>
     <hr />
     <% if (letter) { %>
-    <p class="text-justify text-lg" id="letter">
+    <p class="text-justify" id="letter">
       <%=letter %>
     </p>
     <% } %>
-    <h3 class="text-justify" id="question" name="question_id" value="<%= question_id %> "> 
+    <h4 class="text-justify" id="question" name="question_id" value="<%= question_id %> "> 
       <%= question %>
-    </h3>
+    </h4>
     <p>Question ID: <%= question_id %> ****REMOVE THIS LATER</p>
     <br />
     <% if (choice1) { %>
