@@ -145,7 +145,11 @@ router.post("/scenario", (req, res) => {
       });
     else {
       console.log(answer.question1 == biased_answer);
-      if (answer.question1 == biased_answer && experimental_group == null) {
+      if (
+        (answer.question1 == biased_answer ||
+          answer.question1 == unrelated_answer) &&
+        experimental_group == null
+      ) {
         res.redirect(`./scenario/${biased_route}`);
       } else if (experimental_group == "true") {
         experimental_answer = answer.question1;
@@ -204,8 +208,8 @@ router.post(`/scenario/:participantId`, (req, res) => {
       res.redirect(`/gamebook/usability`);
     } else {
       if (
-        experimental_group == null &&
-        (value == biased_answer || value == unrelated_answer)
+        (value == biased_answer || value == unrelated_answer) &&
+        question_id > 6
       ) {
         //defining path depending on answer
         res.redirect(`./${biased_route}`);

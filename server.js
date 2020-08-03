@@ -25,8 +25,8 @@ app.use("/end", endRouter);
 app.use("/help", helpRouter);
 
 const server = http.createServer(app);
-server.listen(process.env.PORT || 2851, () => {
-  console.log(`Server is running on port ${process.env.PORT || 2851}`);
+server.listen(process.env.PORT || 21977, () => {
+  console.log(`Server is running on port ${process.env.PORT || 21977}`);
 });
 
 // app.listen(process.env.PORT || 3000, () => {
