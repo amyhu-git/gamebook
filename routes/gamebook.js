@@ -5,7 +5,6 @@ const Question = require("../models/gamebook");
 const Answer = require("../models/answer");
 const Usability = require("../models/usability");
 const CriticalAnswer = require("../models/critical_answer");
-// const CriticalQuestion = require("../models/criticalQ");
 
 const { get } = require("http");
 const { isBuffer } = require("util");
@@ -322,16 +321,9 @@ router.post("/cScenario", (req, res) => {
       res.status(500).send({
         message: err.message || "Something occurred while creating the Answer.",
       });
-    // else res.redirect(`/gamebook/question/${question_id}`);
     else {
       res.redirect(`./scenario/${question_id}`);
     }
-    // console.log(answer.question1 == biased_answer);
-    // if (answer.question1 == biased_answer) {
-    //   res.redirect(`./scenario/${biased_route}`);
-    // } else {
-    //   res.redirect(`./scenario/${nonbiased_route}`);
-    // }
   });
 });
 
@@ -383,21 +375,11 @@ router.post(`/decisionQuestion/:participantId/:questionId`, (req, res) => {
     decisionQuestion: req.body.decisionQuestion,
   });
 
-  // console.log(participant_id);
-  // console.log(Object.keys(req.body));
-  // console.log(req.body.answer7);
-
   CriticalAnswer.updateById(
     parseInt(req.params.participantId),
     parseInt(req.params.questionId),
     answer,
     (err, data) => {
-      // console.log(data);
-      // let array = Object.values(answer);
-      // let value = array.find((e) => e !== undefined);
-      // // console.log("Answer" + value);
-      // // console.log("Biased answer value:" + biased_answer);
-      // // console.log(value);
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
@@ -438,69 +420,22 @@ router.post(`/decisionQuestion/:participantId/:questionId`, (req, res) => {
   );
 });
 
-// CriticalQuestion.findById(req.params.criticalQ_Id, (err, data) => {
-//   let allData = Object.assign(...data);
-//   if (err) {
-//     if (err.kind === "not_found") {
-//       res.status(404).send({
-//         message: `Not found Question with id ${req.params.criticalQ_Id}`,
-//       });
-//     } else {
-//       res.status(500).send({
-//         message:
-//           "Error retrieving Question with id " + req.params.critical_Id,
-//       });
-//     }
-//   } else {
-//     // res.send(data.cQuestion1)
-//     res.render("gamebook/cScenario", {
-//       criticalQ_Id: allData.id,
-//       cQuestion1: allData.cQuestion1,
-//       cQuestion2: allData.cQuestion2,
-//       cQuestion3: allData.cQuestion3,
-//       cQuestion4: allData.cQuestion4,
-//       decisionQuestion: allData.decisionQuestion,
-//       choice1: allData.choice1,
-//       choice2: allData.choice2,
-//       choice3: allData.choice3,
-//       alternative1: allData.alternative1,
-//       alternative2: allData.alternative2,
-//       alternative3: allData.alternative3,
-//     });
-//   }
-// });
+//////DELETE PARTICIPANT////////
 
-//get all questions route
-
-// router.get("/allQuestions", (req, res) => {
-//   Question.getAll((err, data) => {
-//     if (err)
-//       res.status(500).send({
-//         message:
-//           err.message || "Some error occurred while retrieving Questions.",
-//       });
-//     else {
-//       res.send(data);
-//     }
-//   });
-// });
-
-// //get participant
-// router.get("/edit/:participantId", (req, res) => {
-//   Participant.findById(req.params.participantId, (err, data) => {
-//     if (err) {
-//       if (err.kind === "not found") {
-//         res.status(404).send({
-//           message: `Not found participant with id ${req.params.participantId}.`,
-//         });
-//       } else {
-//         res.status(500).send({
-//           message:
-//             "Error retrieving participant with id" + req.params.participantId,
-//         });
-//       }
-//     } else res.send(JSON.stringify(data));
-//   });
-// });
+router.delete("/edit/:participantId", (req, res) => {
+  +Answer.remove(req.params.participantId, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found User with id ${req.params.participantId}.`,
+        });
+      } else {
+        res.status(500).send({
+          message: "Could not delete User with id " + req.params.participantId,
+        });
+      }
+    } else res.send({ message: `User was deleted successfully!` });
+  });
+});
 
 module.exports = router;

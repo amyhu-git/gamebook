@@ -1,3 +1,4 @@
+const http = require("http");
 const express = require("express");
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
@@ -23,6 +24,11 @@ app.use("/gamebook", gamebookRouter);
 app.use("/end", endRouter);
 app.use("/help", helpRouter);
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Server listening at ${process.env.PORT || 3000}`);
+const server = http.createServer(app);
+server.listen(process.env.PORT || 2851, () => {
+  console.log(`Server is running on port ${process.env.PORT || 2851}`);
 });
+
+// app.listen(process.env.PORT || 3000, () => {
+//   console.log(`Server listening at ${process.env.PORT || 3000}`);
+// });

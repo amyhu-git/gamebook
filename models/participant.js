@@ -51,27 +51,28 @@ Participant.findById = (participantId, result) => {
   );
 };
 
-// Participant.updateById = (id, participant, result) => {
-//   sql.query(
-//     "UPDATE participants SET question1 = ? WHERE id = ?",
-//     [participant.question1, id],
-//     (err, res) => {
-//       if (err) {
-//         console.log("error: ", err);
-//         result(null, err);
-//         return;
-//       }
+//delete participant
+Participant.remove = (participant_id, result) => {
+  sql.query(
+    "DELETE FROM participants WHERE participant_id = ?",
+    participant_id,
+    (err, res) => {
+      if (err) {
+        console.log("error", err);
+        result(null, err);
+        return;
+      }
 
-//       if ((res.affectedRows = 0)) {
-//         //not found participant with the id
-//         result({ kind: "not_found" }, null);
-//         return;
-//       }
+      if (res.affectedRows == 0) {
+        //not found participant with id
+        result({ kind: "not_found" }, null);
+        return;
+      }
 
-//       console.log("Updated Participant: ", { id: id, ...participant });
-//       result(null, { id: id, ...participant });
-//     }
-//   );
-// };
+      console.log("deleted participant with id ", id);
+      result(null, res);
+    }
+  );
+};
 
 module.exports = Participant;

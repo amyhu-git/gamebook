@@ -91,4 +91,28 @@ CriticalAnswer.remove = (participant_id, result) => {
   );
 };
 
+//delete answers with participant id
+CriticalAnswer.remove = (participant_id, result) => {
+  sql.query(
+    "DELETE FROM critical_answers WHERE participant_id = ?",
+    participant_id,
+    (err, res) => {
+      if (err) {
+        console.log("error", err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows == 0) {
+        //not found participant with id
+        result({ kind: "not_found" }, null);
+        return;
+      }
+
+      console.log("deleted participant's answers with id ", id);
+      result(null, res);
+    }
+  );
+};
+
 module.exports = CriticalAnswer;
