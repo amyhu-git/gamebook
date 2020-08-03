@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scenario</title>
+    <title>View for Scenario Questions</title>
 
     <link
     rel="stylesheet"
@@ -47,10 +47,15 @@
       <%=letter %>
     </p>
     <% } %>
+    <% if(question_id == 7 || question_id == 8) { %> 
+      <h4 class="text-center" id="question" name="question_id" value="<%= question_id %> "> 
+      <%= question %>
+    </h4>
+    <% } else { %> 
     <h4 class="text-justify" id="question" name="question_id" value="<%= question_id %> "> 
       <%= question %>
     </h4>
-    <p>Question ID: <%= question_id %> ****REMOVE THIS LATER</p>
+  <% } %> 
     <br />
     <% if (choice1) { %>
     <button type="submit" class="btn choice-container"  id="answer<%=question_id%>" name="answer<%=question_id%>" value="1">

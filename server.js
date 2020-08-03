@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 //require routes
 const indexRouter = require("./routes/index");
 const gamebookRouter = require("./routes/gamebook");
-// const usabilityRouter = require("./routes/usability");
+const endRouter = require("./routes/end");
 const helpRouter = require("./routes/help");
 
 //configure middleware
@@ -20,7 +20,7 @@ app.use(bodyParser.json()); //parse form data client
 
 app.use("/", indexRouter);
 app.use("/gamebook", gamebookRouter);
-// app.use('/usability', usabilityRouter)
+app.use("/end", endRouter);
 app.use("/help", helpRouter);
 
 app.listen(process.env.PORT || 3000, () => {

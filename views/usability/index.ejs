@@ -263,8 +263,18 @@
               placeholder="E.g. issues, suggestions, etc. "
             />
             <hr />
-            <button class="btn" type="submit">SUBMIT</button>
+            <button class="btn" type="submit">
+              SUBMIT MY DATA AND COMPLETE THE SURVEY
+            </button>
           </div>
+          <br />
+        
+            <p>
+              **If you have changed your mind and wish to withdraw my
+              participation, please confirm on the link below:**
+              <br />
+            </p>
+          </form>
         </div>
       </div>
     </form>
@@ -278,6 +288,12 @@
         if (usabilityRange.value === "0") {
           amount.value = "N.A.";
         }
+      };
+
+      const displayWarning = () => {
+        window.onbeforeunload = function () {
+          return "Are you sure you want to withdraw your participation? All data and responses will be removed.";
+        };
       };
     </script>
   </body>

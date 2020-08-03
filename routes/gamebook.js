@@ -4,6 +4,7 @@ const Participant = require("../models/participant");
 const Question = require("../models/gamebook");
 const Answer = require("../models/answer");
 const Usability = require("../models/usability");
+const CriticalAnswer = require("../models/critical_answer");
 // const CriticalQuestion = require("../models/criticalQ");
 
 const { get } = require("http");
@@ -16,6 +17,8 @@ let biased_answer;
 let unrelated_answer;
 let biased_route;
 let nonbiased_route;
+let experimental_group;
+let experimental_answer;
 
 //Participation info sheet route
 router.get("/", (req, res) => {
@@ -143,8 +146,11 @@ router.post("/scenario", (req, res) => {
       });
     else {
       console.log(answer.question1 == biased_answer);
-      if (answer.question1 == biased_answer) {
+      if (answer.question1 == biased_answer && experimental_group == null) {
         res.redirect(`./scenario/${biased_route}`);
+      } else if (experimental_group == "true") {
+        experimental_answer = answer.question1;
+        res.redirect(`/gamebook/decisionQuestion/${question_id}`);
       } else {
         res.redirect(`./scenario/${nonbiased_route}`);
       }
@@ -198,9 +204,14 @@ router.post(`/scenario/:participantId`, (req, res) => {
     } else if (question_id == 9) {
       res.redirect(`/gamebook/usability`);
     } else {
-      if (value == biased_answer || value == unrelated_answer) {
+      if (
+        experimental_group == null &&
+        (value == biased_answer || value == unrelated_answer)
+      ) {
         //defining path depending on answer
         res.redirect(`./${biased_route}`);
+      } else if (experimental_group == "true" && question_id < 7) {
+        res.redirect(`/gamebook/decisionQuestion/${question_id}`);
       } else {
         res.redirect(`./${nonbiased_route}`);
       }
@@ -234,7 +245,7 @@ router.post("/usability", (req, res) => {
           err.message || "Something occurred while creating the Participant.",
       });
     } else {
-      res.send(data);
+      res.redirect("/end");
     }
   });
 });
@@ -291,6 +302,140 @@ router.get(`/cScenario/:questionId`, (req, res) => {
         alternative3: data.alternative3,
       });
   });
+});
+
+//create new participant route
+router.post("/cScenario", (req, res) => {
+  experimental_group = "true";
+  const answer = new CriticalAnswer({
+    participant_id: participant_id,
+    question_id: question_id,
+    cQuestion1: req.body.cQuestion1,
+    cQuestion2: req.body.cQuestion2,
+    cQuestion3: req.body.cQuestion3,
+    cQuestion4: req.body.cQuestion4,
+    decisionQuestion: req.body.decisionQuestion,
+  });
+
+  CriticalAnswer.insert(answer, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Something occurred while creating the Answer.",
+      });
+    // else res.redirect(`/gamebook/question/${question_id}`);
+    else {
+      res.redirect(`./scenario/${question_id}`);
+    }
+    // console.log(answer.question1 == biased_answer);
+    // if (answer.question1 == biased_answer) {
+    //   res.redirect(`./scenario/${biased_route}`);
+    // } else {
+    //   res.redirect(`./scenario/${nonbiased_route}`);
+    // }
+  });
+});
+
+//retrieve questions by id
+router.get(`/decisionQuestion/:questionId`, (req, res) => {
+  Question.findById(req.params.questionId, (err, data) => {
+    question_id = data.id;
+    biased_answer = data.biased_answer;
+    biased_route = data.biased_route;
+    nonbiased_route = data.nonbiased_route;
+
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Question with id ${req.params.questionId}`,
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Question with id " + req.params.questionId,
+        });
+      }
+    } else
+      res.render("gamebook/decisionQuestion", {
+        participant_id: participant_id,
+        question_id: data.id,
+        scenario: data.scenario,
+        letter: data.letter,
+        answer: experimental_answer,
+        cQuestion1: data.cQuestion1,
+        cQuestion2: data.cQuestion2,
+        cQuestion3: data.cQuestion3,
+        cQuestion4: data.cQuestion4,
+        decisionQuestion: data.decisionQuestion,
+      });
+  });
+});
+
+//Update participant's answer with participant_id
+router.post(`/decisionQuestion/:participantId/:questionId`, (req, res) => {
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content cannot be empty!",
+    });
+  }
+
+  const answer = new CriticalAnswer({
+    participant_id: participant_id,
+    question_id: question_id,
+    decisionQuestion: req.body.decisionQuestion,
+  });
+
+  // console.log(participant_id);
+  // console.log(Object.keys(req.body));
+  // console.log(req.body.answer7);
+
+  CriticalAnswer.updateById(
+    parseInt(req.params.participantId),
+    parseInt(req.params.questionId),
+    answer,
+    (err, data) => {
+      // console.log(data);
+      // let array = Object.values(answer);
+      // let value = array.find((e) => e !== undefined);
+      // // console.log("Answer" + value);
+      // // console.log("Biased answer value:" + biased_answer);
+      // // console.log(value);
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found participant with id ${req.params.participant_id}`,
+          });
+        } else {
+          res.status(500).send({
+            message:
+              "Error updating Participant with Id" + req.params.participant_id,
+          });
+        }
+      } else {
+        if (isNaN(experimental_answer)) {
+          res.redirect(`/gamebook/scenario/${nonbiased_route}`);
+        } else if (question_id == 9) {
+          res.redirect(`/gamebook/usability`);
+        } else if (question_id == 6) {
+          if (
+            experimental_answer == biased_answer ||
+            experimental_answer == unrelated_answer
+          ) {
+            res.redirect(`/gamebook/scenario/${biased_route}`);
+          } else {
+            res.redirect(`/gamebook/scenario/${nonbiased_route}`);
+          }
+        } else {
+          if (
+            experimental_answer == biased_answer ||
+            experimental_answer == unrelated_answer
+          ) {
+            res.redirect(`/gamebook/cScenario/${biased_route}`);
+          } else {
+            res.redirect(`/gamebook/cScenario/${nonbiased_route}`);
+          }
+        }
+      }
+    }
+  );
 });
 
 // CriticalQuestion.findById(req.params.criticalQ_Id, (err, data) => {

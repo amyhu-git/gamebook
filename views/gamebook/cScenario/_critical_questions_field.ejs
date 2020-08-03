@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demographic information</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  </head>
+
+  <body>
+    <form
+      class="add-answers-form"
+      id="input"
+      action="/gamebook/cScenario"
+      method="POST"
+    >
+      <div class="container">
+        <div id="instruction" class="flex-center flex-column">
+          <div class="form-group">
+            <hr />
+            <h3 class="font-weight-light text-justify" id="scenario">
+              <%= scenario %>
+            </h3>
+            <hr />
+            <% if (letter) { %>
+            <p class="text-justify text-lg" id="letter">
+              <%=letter %>
+            </p>
+            <hr />
+            <br />
+            <% } %> <% if (cQuestion1) { %>
+            <h5 class="text-justify">
+              <label for="cQuestion1"><%=cQuestion1 %></label>
+            </h5>
+            <select
+              class="form-control form-control-lg"
+              name="cQuestion1"
+              required
+            >
+              <% if(question_id == 1 || question_id == 6) { %>
+              <option value="" disabled selected
+                >Please select your answer ...</option
+              >
+              <option value="1"><%= alternative1 %> </option>
+              <option value="2"><%= alternative2 %> </option>
+              <option value="3"><%= alternative3 %> </option>
+
+              <% } else { %>
+              <option value="" disabled selected
+                >Please select your answer ...</option
+              >
+              <option value="1">Yes</option>
+              <option value="2">No</option>
+              <option value="3">Unsure</option>
+              <% } %>
+            </select>
+            <div class="invalid-feedback">Please select an answer.</div>
+            <br />
+            <h5 class="text-justify">
+              <label for="cQuestion2"><%=cQuestion2 %></label>
+            </h5>
+            <select
+              class="form-control form-control-lg"
+              name="cQuestion2"
+              required
+            >
+              <option value="" disabled selected
+                >Please select your answer ...</option
+              >
+              <option value="1">Yes</option>
+              <option value="2">No</option>
+              <option value="3">Unsure</option>
+            </select>
+            <div class="invalid-feedback">Please select an answer.</div>
+            <% if(cQuestion3) { %>
+            <br />
+            <h5 class="text-justify">
+              <label for="cQuestion3"> <%=cQuestion3 %></label>
+            </h5>
+            <select
+              class="form-control form-control-lg"
+              name="cQuestion3"
+              required
+            >
+              <option value="" disabled selected
+                >Please select your answer ...</option
+              >
+              <option value="1">Yes</option>
+              <option value="2">No</option>
+              <option value="3">Unsure</option>
+            </select>
+            <div class="invalid-feedback">Please select an answer.</div>
+            <% } %> <% if(cQuestion4) { %>
+            <br />
+            <h5 class="text-justify">
+              <label for="cQuestion4"><%=cQuestion4 %></label>
+            </h5>
+            <select
+              class="form-control form-control-lg"
+              name="cQuestion4"
+              required
+            >
+              <option value="" disabled selected
+                >Please select your answer ...</option
+              >
+              <option value="1">Yes</option>
+              <option value="2">No</option>
+              <option value="3">Unsure</option>
+            </select>
+            <div class="invalid-feedback">Please select an answer.</div>
+            <% } %>
+            <br />
+            <button class="btn" type="submit">CONTINUE</button>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

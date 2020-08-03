@@ -34,7 +34,9 @@
                 class="form-control"
                 id="participation-condition"
                 name="participation_condition"
+                required
               />
+              <div class="invalid-feedback">Invalid input.</div>
             </div>
             <br />
             <label for="age_group">Please indicate your age group:</label>
@@ -42,8 +44,11 @@
               class="form-control form-control-lg"
               id="age_group"
               name="age_group"
+              required
             >
-              <option value="" disabled selected>Select your option ..</option>
+              <option value="" disabled selected
+                >Please select your answer ...</option
+              >
               <option value="1">18-24</option>
               <option value="2">25-34</option>
               <option value="3">35-44</option>
@@ -51,43 +56,59 @@
               <option value="5">65 or older</option>
               <option value="6">Rather Not Say</option>
             </select>
+            <div class="invalid-feedback">Please select an answer.</div>
             <br />
             <label for="gender">Please indicate your gender</label>
             <select
               class="form-control form-control-lg"
               id="gender"
               name="gender"
+              required
             >
-              <option value="" disabled selected>Select your option ..</option>
+              <option value="" disabled selected
+                >Please select your answer ...</option
+              >
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="others">Others</option>
               <option value="na">Rather Not Say</option>
             </select>
+            <div class="invalid-feedback">Please select an answer.</div>
             <br />
             <label for="english_skills">Is English your first language?</label>
             <select
               class="form-control form-control-lg"
               name="english_skills"
               aria-placeholder="Please select ..."
+              required
             >
-              <option value="" disabled selected>Select your option ..</option>
+              <option value="" disabled selected
+                >Please select your answer ...</option
+              >
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Unknown">Rather Not Say</option>
             </select>
+            <div class="invalid-feedback">Please select an answer.</div>
             <br />
             <label for="language_skills">Are you bilingual?</label>
-            <select class="form-control form-control-lg" name="language_skills">
-              <option value="" disabled selected>Select your option ..</option>
+            <select
+              class="form-control form-control-lg"
+              name="language_skills"
+              required
+            >
+              <option value="" disabled selected
+                >Please select your answer ...</option
+              >
               <option value="Yes">Yes</option>
               <option value="No">No</option>
               <option value="Unknown">Rather Not Say</option>
             </select>
+            <div class="invalid-feedback">Please select an answer.</div>
             <br />
             <label for="education">
               Please provide your current
-              <b>highest achieved and completed</b> educational level? <br />
+              <b>highest achieved and completed</b> educational level: <br />
               <p>
                 * Examples for each education level can be found at the end of
                 the page.
@@ -97,8 +118,11 @@
               class="form-control form-control-lg"
               id="education"
               name="education"
+              required
             >
-              <option value="" disabled selected>Select your option ..</option>
+              <option value="" disabled selected
+                >Please select your answer ...</option
+              >
               <option value="0">Entry</option>
               <option value="1">Level 1</option>
               <option value="2">Level 2</option>
@@ -110,6 +134,7 @@
               <option value="8">Level 8</option>
               <option value="9">Rather Not Say</option>
             </select>
+            <div class="invalid-feedback">Please select an answer.</div>
             <br />
             <button class="btn" type="submit">CONTINUE</button>
           </form>
@@ -126,7 +151,7 @@
                     aria-expanded="true"
                     aria-controls="collapseOne"
                   >
-                    Click here to find the definition for each education level.
+                    Education Level Classification in the UK.
                   </button>
                 </p>
               </div>
